@@ -1,0 +1,705 @@
+generator ftsClient {
+  provider = "prisma-client-js"
+  output   = "../../src/generated/fts-client"
+}
+
+datasource ftsDb {
+  provider = "mysql"
+}
+
+model E_OFFICE_STATS {
+  id                     Int       @id @default(autoincrement())
+  date                   DateTime  @ftsDb.Date
+  department_title       String    @ftsDb.VarChar(255)
+  department_id          Int
+  total_files            Int       @default(0)
+  total_files_open       Int       @default(0)
+  total_files_closed     Int       @default(0)
+  total_pending_files    Int       @default(0)
+  total_normal_files     Int       @default(0)
+  total_urgent_files     Int       @default(0)
+  total_immediate_files  Int       @default(0)
+  avg_turnaround_time    Float     @default(0) @ftsDb.Float
+  avg_file_response_time Float     @default(0) @ftsDb.Float
+  created_at             DateTime? @ftsDb.DateTime(0)
+  updated_at             DateTime? @ftsDb.DateTime(0)
+  deleted_at             DateTime? @ftsDb.DateTime(0)
+}
+
+
+model CMS_STATS {
+  id                             Int       @id @default(autoincrement())
+  date                           DateTime  @ftsDb.Date
+  admitTerm                      Int?      @map("Admit Term")
+  Student_Intake                 String?   @ftsDb.VarChar(50)
+  Regiion                        String?   @ftsDb.VarChar(50)
+  Institution                    String?   @ftsDb.VarChar(50)
+  acadCareer                     String?   @map("Acad Career") @ftsDb.VarChar(50)
+  acadProg                       Int?      @map("Acad Prog")
+  programTitle                   String?   @map("Program Title") @ftsDb.VarChar(50)
+  Mode                           String?   @ftsDb.VarChar(50)
+  Total_Enroll                   Int?
+  Total_Enroll_Male              Int?
+  Total_Enroll_Female            Int?
+  Total_Enroll_Transgender       Int?
+  Discontinue_Enroll             Int?
+  Discontinue_Enroll_Male        Int?
+  Discontinue_Enroll_Female      Int?
+  Discontinue_Enrll_Transgender  Int?
+  Active_Enroll                  Int?
+  Active_Enroll_Male             Int?
+  Active_Enroll_Female           Int?
+  Active_Enroll_Transgender      Int?
+  Bachlor_Enrollment             Int?
+  Bachlor_Enrollment_Male        Int?
+  Bachlor_Enrollment_Female      Int?
+  Bachlor_Enrollment_Transgender Int?
+  created_at                     DateTime?
+  updated_at                     DateTime?
+  deleted_at                     DateTime?
+
+  @@index([Regiion])
+  @@index([acadCareer])
+  @@index([programTitle])
+  @@index([Mode])
+  @@index([Student_Intake])
+  @@index([Total_Enroll])
+}
+
+
+
+model TMS_STATS {
+  id                      Int       @id @default(autoincrement())
+  date                    DateTime? @ftsDb.Date
+  semester                String?   @ftsDb.VarChar(50)
+  region                  String?   @ftsDb.VarChar(50)
+  allocated_tutors        Int?
+  total_eligible_tutors   Int?
+  allocated_enrollments   Int?
+  unallocated_enrollments Int?
+  confirmed_files         Int?
+  not_confirmed_files     Int?
+  allocated_students      Int?
+  unallocated_students    Int?
+  total_students          Int?
+  created_at              DateTime?
+  updated_at              DateTime?
+  deleted_at              DateTime?
+
+  @@index([semester])
+  @@index([region])
+}
+
+model ERP_STATS {
+  id              Int       @id @default(autoincrement())
+  date            DateTime? @ftsDb.Date
+  account_code    String?   @ftsDb.VarChar(10)
+  account_title   String?   @ftsDb.VarChar(50)
+  dept_code       Int?
+  dept_title      String?   @ftsDb.VarChar(50)
+  budget_type     String?   @ftsDb.VarChar(50)
+  fiscal_year     String?   @ftsDb.VarChar(50)
+  campus          String?   @ftsDb.VarChar(50)
+  commitment      Int?
+  pre_encumbrance Int?
+  encumbrance     Int?
+  expense         Int?
+  balance         Int?
+  created_at      DateTime?
+  updated_at      DateTime?
+  deleted_at      DateTime?
+
+  @@index([campus])
+  @@index([dept_title])
+  @@index([account_title])
+  @@index([budget_type])
+  @@index([fiscal_year])
+}
+
+
+model account_title {
+  id         Int       @id @default(autoincrement())
+  title      String    @ftsDb.VarChar(52)
+  account_id Int
+  created_at DateTime? @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+}
+
+model alerts {
+  id            BigInt    @id @default(autoincrement())
+  puc_master_id BigInt?
+  from_user_id  BigInt?
+  to_user_id    BigInt?
+  alert_msg     String?   @ftsDb.Text
+  alert_date    DateTime? @ftsDb.DateTime(0)
+  created_at    DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at    DateTime? @ftsDb.DateTime(0)
+  deleted_at    DateTime? @ftsDb.DateTime(0)
+}
+
+model allowed_users {
+  id            BigInt    @id @default(autoincrement())
+  user_id       BigInt?
+  allow_user_id BigInt?
+  created_at    DateTime? @ftsDb.DateTime(0)
+  updated_at    DateTime? @ftsDb.DateTime(0)
+  deleted_at    DateTime? @ftsDb.DateTime(0)
+  counter       Int       @default(0) @ftsDb.UnsignedInt
+  user_order    Int?
+}
+
+model attachments {
+  id                     Int       @id @default(autoincrement())
+  puc_master_id          Int
+  puc_track_id           Int?
+  puc_track_para_id      BigInt?
+  puc_track_history_id   Int?
+  upload_directory       String?   @ftsDb.VarChar(50)
+  path                   String?   @ftsDb.VarChar(200)
+  title                  String?   @ftsDb.VarChar(200)
+  attachment_source_type String?   @ftsDb.VarChar(300)
+  created_at             DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at             DateTime? @ftsDb.Timestamp(0)
+  deleted_at             DateTime? @ftsDb.Timestamp(0)
+
+  @@index([puc_master_id], map: "puc_master_id")
+  @@index([puc_track_id], map: "puc_track_id")
+}
+
+model categories {
+  id         Int       @id @default(autoincrement())
+  category   String    @ftsDb.VarChar(500)
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+}
+
+model cc {
+  id          Int      @id @default(autoincrement())
+  subject     String   @ftsDb.VarChar(255)
+  puc_content String   @ftsDb.LongText
+  enc_key     String?  @ftsDb.VarChar(100)
+  barcode     String   @ftsDb.VarChar(55)
+  attachments String?  @ftsDb.Text
+  from_user   Int
+  to_users    String?  @ftsDb.Text
+  created_at  DateTime @ftsDb.DateTime(0)
+  updated_at  DateTime @ftsDb.DateTime(0)
+}
+
+model cc_tracks {
+  id            Int      @id @default(autoincrement())
+  cc_id         Int
+  user_id       Int
+  viewed_status Int      @ftsDb.TinyInt
+  created_at    DateTime @ftsDb.DateTime(0)
+  updated_at    DateTime @ftsDb.DateTime(0)
+}
+
+model citizen_informations {
+  id            Int       @id @default(autoincrement())
+  puc_master_id Int?
+  citizenname   String?   @ftsDb.VarChar(150)
+  cnic          String?   @ftsDb.VarChar(15)
+  mobile        String?   @ftsDb.VarChar(15)
+  district_id   Int?
+  created_at    DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at    DateTime? @ftsDb.DateTime(0)
+  deleted_at    DateTime? @ftsDb.DateTime(0)
+
+  @@index([puc_master_id], map: "puc_master_id")
+}
+
+model department_configs {
+  id                     Int       @id @default(autoincrement())
+  attachment_source_type String?   @ftsDb.VarChar(200)
+  department_id          Int
+  title                  String    @ftsDb.VarChar(700)
+  path                   String    @ftsDb.VarChar(700)
+  created_at             DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at             DateTime? @ftsDb.DateTime(0)
+  deleted_at             DateTime? @ftsDb.DateTime(0)
+
+  @@index([department_id], map: "department_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model disposed_types {
+  id         Int
+  title      String    @ftsDb.VarChar(200)
+  created_at DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+
+  @@ignore
+}
+
+model efile_attachments {
+  id                     Int       @id @default(autoincrement())
+  puc_efile_id           Int
+  efile_track_id         Int?
+  path                   String?   @ftsDb.VarChar(200)
+  title                  String?   @ftsDb.VarChar(200)
+  attachment_source_type String?   @ftsDb.VarChar(200)
+  created_at             DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at             DateTime? @ftsDb.Timestamp(0)
+  deleted_at             DateTime? @ftsDb.Timestamp(0)
+
+  @@index([efile_track_id], map: "efile_track_id")
+  @@index([puc_efile_id], map: "puc_efile_id")
+}
+
+model efile_details {
+  id                 Int       @id @default(autoincrement())
+  puc_efile_id       Int?
+  from_department_id Int?
+  from_user_id       Int?
+  to_department_id   Int?
+  to_user_id         Int?
+  efiletype          String    @default("o") @ftsDb.VarChar(2)
+  parentid           Int?
+  Description        String?   @ftsDb.VarChar(10000)
+  issuedate          DateTime  @default(now()) @ftsDb.DateTime(0)
+  receiveddate       DateTime? @ftsDb.DateTime(0)
+  forwarddate        DateTime? @ftsDb.DateTime(0)
+  created_at         DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at         DateTime? @ftsDb.DateTime(0)
+  deleted_at         DateTime? @ftsDb.DateTime(0)
+
+  @@index([from_department_id], map: "from_department_id")
+  @@index([from_user_id], map: "from_user_id")
+  @@index([parentid], map: "parentid")
+  @@index([puc_efile_id], map: "puc_efile_id")
+  @@index([to_department_id], map: "to_department_id")
+  @@index([to_user_id], map: "to_user_id")
+}
+
+model efile_tracks {
+  id                 Int       @id @default(autoincrement())
+  efile_detail_id    Int
+  from_department_id Int       @default(0)
+  from_user_id       Int       @default(0)
+  to_department_id   Int       @default(0)
+  to_user_id         Int       @default(0)
+  description        String?   @ftsDb.VarChar(1000)
+  receiveddate       DateTime? @ftsDb.DateTime(0)
+  forwarddate        DateTime? @ftsDb.DateTime(0)
+  created_at         DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at         DateTime? @ftsDb.DateTime(0)
+  deleted_at         DateTime? @ftsDb.DateTime(0)
+
+  @@index([efile_detail_id], map: "efile_detail_id")
+  @@index([from_department_id], map: "from_department_id")
+  @@index([from_user_id], map: "from_user_id")
+  @@index([to_department_id], map: "to_department_id")
+  @@index([to_user_id], map: "to_user_id")
+}
+
+model file_purposes {
+  id          Int       @id @default(autoincrement())
+  filepurpose String    @ftsDb.VarChar(100)
+  created_at  DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at  DateTime? @ftsDb.DateTime(0)
+  deleted_at  DateTime? @ftsDb.DateTime(0)
+}
+
+model file_statuses {
+  id         Int       @id @default(autoincrement())
+  filestatus String    @ftsDb.VarChar(100)
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+}
+
+model file_types {
+  id         Int       @id @default(autoincrement())
+  filetype   String    @ftsDb.VarChar(100)
+  ftsid      Int
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+
+  @@index([ftsid], map: "ftsid")
+}
+
+model flags {
+  id         Int       @id @default(autoincrement())
+  flag       String    @ftsDb.VarChar(100)
+  noofadys   Int       @default(1)
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+}
+
+model inquiry_types {
+  id         Int       @id @default(autoincrement())
+  title      String    @ftsDb.VarChar(500)
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+}
+
+model issue {
+  idissue        Int      @id @default(autoincrement()) @ftsDb.UnsignedInt
+  barcode        String   @default("") @ftsDb.VarChar(45)
+  fileno         String   @default("") @ftsDb.VarChar(45)
+  dairyno        String   @default("") @ftsDb.VarChar(45)
+  subject        String?  @ftsDb.Text
+  remarks        String?  @ftsDb.Text
+  idfiletype     Int      @default(0) @ftsDb.UnsignedInt
+  idfilestatus   Int      @default(0) @ftsDb.UnsignedInt
+  idflag         Int      @default(0) @ftsDb.UnsignedInt
+  idvolume       Int      @default(0) @ftsDb.UnsignedInt
+  idsource       Int      @default(0) @ftsDb.UnsignedInt
+  fromdept       Int      @default(0) @ftsDb.UnsignedInt
+  fromsection    Int      @default(0) @ftsDb.UnsignedInt
+  todept         Int      @default(0) @ftsDb.UnsignedInt
+  tosection      Int      @default(0) @ftsDb.UnsignedInt
+  scan           String   @ftsDb.VarChar(100)
+  idfile_purpose Int      @default(0)
+  datetime       DateTime @ftsDb.DateTime(0)
+  idusers        Int      @default(0) @ftsDb.UnsignedInt
+  ip             String   @default("") @ftsDb.VarChar(45)
+
+  @@index([fromdept], map: "fromdept")
+  @@index([fromsection], map: "fromsection")
+  @@index([idfilestatus], map: "idfilestatus")
+  @@index([idfiletype], map: "idfiletype")
+  @@index([todept], map: "todept")
+  @@index([tosection], map: "tosection")
+  @@index([tosection], map: "tosection_2")
+}
+
+model kpi_hierarchy_items {
+  id                Int       @id @default(autoincrement())
+  kpi_id            Int
+  hierarchy_item_id Int
+  created_at        DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at        DateTime? @ftsDb.DateTime(0)
+  deleted_at        DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model kpi_values {
+  id               Int       @id @default(autoincrement())
+  main_function_id Int       @default(0)
+  main_task_id     Int
+  kpi_id           Int       @default(0)
+  puc_master_id    Int?
+  puc_track_id     Int       @default(0)
+  user_id          Int       @default(0)
+  to_user_id       Int       @default(0)
+  kpi              String    @ftsDb.VarChar(500)
+  kpiquality       Int?      @default(0)
+  kpidisposal      Int?      @default(0)
+  remarks          String?   @ftsDb.VarChar(500)
+  quality          Int
+  disposal         Int
+  taskweight       Int
+  kpidate          DateTime? @ftsDb.DateTime(0)
+  created_at       DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at       DateTime? @ftsDb.DateTime(0)
+  deleted_at       DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model main_functions {
+  id         Int       @id @default(autoincrement())
+  wing       String    @ftsDb.VarChar(200)
+  user_id    Int
+  to_user_id Int
+  function   String    @ftsDb.VarChar(1000)
+  score      Int
+  created_at DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model main_tasks {
+  id               Int       @id @default(autoincrement())
+  main_function_id Int
+  majortask        String    @ftsDb.VarChar(1000)
+  details          String?   @ftsDb.VarChar(10000)
+  weight           Int
+  created_at       DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at       DateTime? @ftsDb.DateTime(0)
+  deleted_at       DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model master_files {
+  id             Int       @id @default(autoincrement())
+  subject        String    @ftsDb.VarChar(500)
+  volume         Int?      @default(0)
+  file_status_id Int?      @default(1)
+  file_type_id   Int?
+  user_id        Int
+  created_at     DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at     DateTime? @ftsDb.DateTime(0)
+  deleted_at     DateTime? @ftsDb.DateTime(0)
+}
+
+model puc_check_lists {
+  id            Int       @id @default(autoincrement())
+  puc_track_id  Int
+  check_list_id Int
+  score         String?   @ftsDb.VarChar(7)
+  created_at    DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at    DateTime? @ftsDb.DateTime(0)
+  deleted_at    DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model puc_efiles {
+  id          Int       @id @default(autoincrement())
+  barcode     String    @ftsDb.VarChar(20)
+  refno       String?   @ftsDb.VarChar(50)
+  subject     String    @ftsDb.VarChar(1000)
+  description String    @ftsDb.VarChar(10000)
+  efiletype   String    @default("internal") @ftsDb.VarChar(20)
+  issuedate   DateTime? @default(dbgenerated("'0000-00-00 00:00:00'")) @ftsDb.DateTime(0)
+  parentid    Int?
+  created_at  DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at  DateTime? @ftsDb.DateTime(0)
+  deleted_at  DateTime? @ftsDb.DateTime(0)
+}
+
+model puc_master_routes {
+  id            Int       @id @default(autoincrement())
+  puc_master_id String?   @ftsDb.VarChar(45)
+  user_id       Int?
+  users         String?   @ftsDb.VarChar(245)
+  created_at    DateTime? @ftsDb.DateTime(0)
+  updated_at    DateTime? @ftsDb.Timestamp(0)
+  deleted_at    DateTime? @ftsDb.DateTime(0)
+}
+
+model puc_masters {
+  id                 Int       @id @default(autoincrement())
+  idissue            Int       @default(0)
+  barcode            String    @ftsDb.VarChar(30)
+  subject            String    @ftsDb.VarChar(1000)
+  remarks            String?   @ftsDb.Text
+  main_task_id       Int?      @default(0)
+  file_type_id       Int       @default(22)
+  flag_id            Int
+  file_status_id     Int?      @default(1)
+  file_purpose_id    Int?      @default(1)
+  from_user_id       Int?
+  from_proxy_user_id Int?      @default(0)
+  to_user_id         Int?
+  master_file_id     Int?
+  category_id        Int?      @default(0)
+  inquiry_type_id    Int?
+  rnino              String?   @ftsDb.VarChar(100)
+  refno              String?   @ftsDb.VarChar(100)
+  puctype            String?   @default("Internal") @ftsDb.VarChar(40)
+  type               String?   @default("to") @ftsDb.VarChar(10)
+  masterid           Int?
+  received_date      DateTime? @ftsDb.DateTime(0)
+  received_datel     DateTime? @ftsDb.DateTime(0)
+  disposed_history   String?   @ftsDb.VarChar(1000)
+  disposed_date      DateTime? @ftsDb.Date
+  disposed_type_id   Int?
+  status             String?   @ftsDb.VarChar(50)
+  last_para_id       Int?
+  esummaryid         Int?
+  created_at         DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at         DateTime? @ftsDb.DateTime(0)
+  deleted_at         DateTime? @ftsDb.DateTime(0)
+  summary_highlights String?   @ftsDb.Text
+  video_message      String?   @ftsDb.Text
+  audio_message      String?   @ftsDb.Text
+  puc_nature         String?   @ftsDb.Text
+  closed_by_auth     Int?      @ftsDb.UnsignedInt
+
+  @@index([disposed_date], map: "disposed_date")
+  @@index([file_status_id], map: "file_status_id")
+  @@index([from_user_id], map: "from_user_id")
+  @@index([closed_by_auth], map: "puc_masters_users_FK")
+  @@index([to_user_id], map: "to_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model puc_track_histories {
+  id                   BigInt    @id @default(autoincrement())
+  puc_master_id        Int
+  puc_track_id         Int
+  description          String    @ftsDb.LongText
+  track_history_type   String    @default("CHILD_COMMENT_FEEDBACK") @ftsDb.VarChar(50)
+  puc_track_outcome_id Int?
+  created_at           DateTime? @ftsDb.DateTime(0)
+  updated_at           DateTime  @default(now()) @ftsDb.Timestamp(0)
+  deleted_at           DateTime? @ftsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model puc_track_outcomes {
+  id          Int       @id @default(autoincrement())
+  category_id Int?
+  batch       String?   @ftsDb.VarChar(30)
+  title       String?   @ftsDb.VarChar(100)
+  created_at  DateTime? @ftsDb.DateTime(0)
+  updated_at  DateTime  @default(now()) @ftsDb.Timestamp(0)
+  deleted_at  DateTime? @ftsDb.DateTime(0)
+}
+
+model puc_track_paras {
+  id             BigInt    @id @default(autoincrement())
+  puc_master_id  BigInt?
+  puc_track_id   Int?
+  para_counter   Int?
+  remarks        String?   @ftsDb.LongText
+  uuid           String?   @ftsDb.VarChar(50)
+  enc_key        String?   @ftsDb.VarChar(100)
+  attachments    String?   @ftsDb.LongText
+  created_at     DateTime? @ftsDb.DateTime(0)
+  updated_at     DateTime? @default(now()) @ftsDb.Timestamp(0)
+  deleted_at     DateTime? @ftsDb.DateTime(0)
+  remarks_backup String?   @ftsDb.LongText
+}
+
+model puc_tracks {
+  id                 Int       @id @default(autoincrement())
+  main_task_id       Int?
+  puc_master_id      Int
+  from_user_id       Int
+  to_user_id         Int
+  from_proxy_user_id Int?      @default(0)
+  to_proxy_user_id   Int?      @default(0)
+  file_purpose_id    Int?      @default(1)
+  forwarded_date     DateTime  @default(now()) @ftsDb.DateTime(0)
+  received_date      DateTime? @default(now()) @ftsDb.DateTime(0)
+  disposed_date      DateTime? @ftsDb.DateTime(0)
+  diaryno            String?   @ftsDb.VarChar(100)
+  rnino              String?   @ftsDb.VarChar(100)
+  type               String?   @default("to") @ftsDb.VarChar(10)
+  remarks            String?   @ftsDb.LongText
+  star_value         Int?      @default(1)
+  user_config_id     BigInt?
+  deleted_at         DateTime? @ftsDb.DateTime(0)
+  created_at         DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at         DateTime? @ftsDb.DateTime(0)
+  deleted_remarks    String?   @ftsDb.Text
+  sticky_note        String?   @ftsDb.LongText
+
+  @@index([from_user_id], map: "from_user_id")
+  @@index([to_user_id], map: "to_user_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model quality_indexes {
+  id         Int
+  title      String?   @ftsDb.VarChar(500)
+  created_at DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model reject_types {
+  id         Int
+  title      String    @ftsDb.VarChar(500)
+  created_at DateTime  @default(now()) @ftsDb.Timestamp(0)
+  updated_at DateTime? @ftsDb.DateTime(0)
+  deleted_at DateTime? @ftsDb.DateTime(0)
+
+  @@ignore
+}
+
+model short_notes {
+  id          Int                      @id @default(autoincrement())
+  shortnote   String?                  @ftsDb.Text
+  user_id     BigInt?
+  view_status short_notes_view_status? @default(public)
+  created_at  DateTime?                @ftsDb.DateTime(0)
+  updated_at  DateTime                 @default(now()) @ftsDb.Timestamp(0)
+  deleted_at  DateTime?                @ftsDb.DateTime(0)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model summary_quality_indexes {
+  id               Int       @default(autoincrement())
+  quality_index_id Int
+  puc_master_id    Int
+  puc_track_id     Int?
+  quality          String?   @ftsDb.VarChar(50)
+  remarks          String?   @ftsDb.VarChar(500)
+  created_at       DateTime? @default(now()) @ftsDb.Timestamp(0)
+  updated_at       DateTime? @ftsDb.DateTime(0)
+  deleted_at       DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+  @@ignore
+}
+
+model temp_attachments {
+  id               BigInt    @id @default(autoincrement())
+  form_name        String?   @ftsDb.VarChar(50)
+  entry_table_name String?   @ftsDb.VarChar(50)
+  entry_field_name String?   @ftsDb.VarChar(50)
+  title            String?   @ftsDb.VarChar(100)
+  upload_directory String?   @ftsDb.VarChar(50)
+  path             Bytes?    @ftsDb.VarBinary(250)
+  user_id          Int?
+  proxy_user_id    Int?
+  created_at       DateTime? @ftsDb.DateTime(0)
+  updated_at       DateTime  @default(now()) @ftsDb.Timestamp(0)
+  deleted_at       DateTime? @ftsDb.DateTime(0)
+}
+
+model user_configs {
+  id                    BigInt    @id @default(autoincrement())
+  user_id               Int
+  department_id         Int
+  personal_no           String?   @ftsDb.VarChar(30)
+  username              String?   @ftsDb.VarChar(200)
+  from_date             DateTime? @ftsDb.DateTime(0)
+  to_date               DateTime? @ftsDb.DateTime(0)
+  active                String    @default("1") @ftsDb.VarChar(1)
+  pincode               Int?      @ftsDb.SmallInt
+  expdate               DateTime? @ftsDb.Date
+  pincode_preference    String?   @default("weekly") @ftsDb.VarChar(25)
+  pincode_effected_date DateTime? @ftsDb.Date
+  path                  String?   @ftsDb.VarChar(100)
+  user_image            String?   @ftsDb.VarChar(100)
+  created_at            DateTime  @default(now()) @ftsDb.DateTime(0)
+  updated_at            DateTime? @ftsDb.DateTime(0)
+  deleted_at            DateTime? @ftsDb.DateTime(0)
+
+  @@index([id], map: "id")
+}
+
+model users_infos {
+  id           Int     @id @default(autoincrement())
+  IdDepartment Int?
+  Department   String? @ftsDb.VarChar(400)
+  userID       Int?
+  users        String? @ftsDb.VarChar(400)
+  ftsid        Int?
+}
+
+model visitors {
+  id            BigInt    @id @default(autoincrement())
+  user_id       BigInt?
+  visit_date    DateTime? @ftsDb.Date
+  visit_counter Int?
+  created_at    DateTime? @ftsDb.DateTime(0)
+  updated_at    DateTime  @default(now()) @ftsDb.Timestamp(0)
+
+  @@index([user_id], map: "user_id")
+}
+
+enum short_notes_view_status {
+  public
+  private
+}

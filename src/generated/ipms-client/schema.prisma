@@ -1,0 +1,908 @@
+generator ipmsClient {
+  provider = "prisma-client-js"
+  output   = "../../src/generated/ipms-client"
+}
+
+datasource ipmsDb {
+  provider = "mysql"
+}
+
+model activity_logs {
+  id         BigInt    @id @default(autoincrement()) @ipmsDb.UnsignedBigInt
+  user_id    Int       @ipmsDb.UnsignedInt
+  app_id     Int?
+  log_type   Int       @default(1) @ipmsDb.UnsignedTinyInt
+  route      String?   @ipmsDb.VarChar(255)
+  user_agent String?   @ipmsDb.Text
+  created_at DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.Timestamp(0)
+
+  @@index([app_id], map: "app_id")
+  @@index([user_id], map: "user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model app_menu_hierarchy_item {
+  id                Int       @id @default(autoincrement())
+  app_menu_id       Int?
+  hierarchy_item_id Int?
+  created_at        DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at        DateTime? @ipmsDb.DateTime(0)
+  deleted_at        DateTime? @ipmsDb.DateTime(0)
+
+  @@index([app_menu_id], map: "app_menu_id")
+  @@index([hierarchy_item_id], map: "hierarchy_item_id")
+}
+
+model app_menu_items {
+  id          Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  app_menu_id Int       @ipmsDb.UnsignedInt
+  title       String    @ipmsDb.VarChar(200)
+  route       String    @ipmsDb.VarChar(255)
+  active      Int       @default(1) @ipmsDb.TinyInt
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+  created_at  DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime? @ipmsDb.Timestamp(0)
+
+  @@index([app_menu_id], map: "app_menu_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model app_menu_items_allowed {
+  id                Int      @id @default(autoincrement())
+  hierarchy_item_id Int?
+  app_menu_item_id  Int?
+  created_at        DateTime @default(now()) @ipmsDb.Timestamp(0)
+
+  @@index([app_menu_item_id], map: "app_menu_item_id")
+  @@index([hierarchy_item_id], map: "hierarchy_item_id")
+}
+
+model app_menus {
+  id          Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  app_id      Int       @ipmsDb.UnsignedInt
+  title       String    @ipmsDb.VarChar(200)
+  route       String    @ipmsDb.VarChar(100)
+  description String?   @ipmsDb.Text
+  icon        String?   @ipmsDb.VarChar(100)
+  active      Int       @default(1) @ipmsDb.TinyInt
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+  created_at  DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime? @ipmsDb.Timestamp(0)
+  apps        apps      @relation(fields: [app_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "app_menus_app_id_foreign")
+
+  @@index([app_id], map: "app_menus_app_id_foreign")
+}
+
+model app_role {
+  id      Int @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  role_id Int @ipmsDb.UnsignedInt
+  app_id  Int @ipmsDb.UnsignedInt
+
+  @@index([app_id], map: "app_id")
+  @@index([role_id], map: "role_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model app_routes {
+  id                Int                          @id @default(autoincrement())
+  app_id            Int?
+  route_type        app_routes_route_type?
+  user_type         app_routes_user_type?
+  department_id     Int?
+  user_id           Int?
+  hierarchy_item_id Int?
+  user_access_type  app_routes_user_access_type?
+  remarks           String?                      @ipmsDb.Text
+  created_at        DateTime?                    @ipmsDb.DateTime(0)
+  updated_at        DateTime                     @default(now()) @ipmsDb.Timestamp(0)
+  deleted_at        DateTime?                    @ipmsDb.DateTime(0)
+}
+
+model app_types {
+  id           Int       @id
+  title        String?   @ipmsDb.VarChar(45)
+  value        String?   @ipmsDb.VarChar(45)
+  description  String?   @ipmsDb.Text
+  extra_fields String?   @ipmsDb.LongText
+  updated_at   DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  created_at   DateTime? @ipmsDb.DateTime(0)
+  deleted_at   DateTime? @ipmsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model apps {
+  id           Int         @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  title        String      @ipmsDb.VarChar(200)
+  route        String?     @ipmsDb.VarChar(255)
+  description  String?     @ipmsDb.Text
+  icon         String?     @ipmsDb.VarChar(100)
+  sdp          Int         @default(0) @ipmsDb.TinyInt
+  app_type     String?     @default("CORE_APP") @ipmsDb.VarChar(45)
+  active       Int         @default(0) @ipmsDb.TinyInt
+  extra_fields String?     @ipmsDb.LongText
+  deleted_at   DateTime?   @ipmsDb.DateTime(0)
+  created_at   DateTime?   @default(now()) @ipmsDb.Timestamp(0)
+  updated_at   DateTime?   @ipmsDb.Timestamp(0)
+  app_menus    app_menus[]
+}
+
+model brands {
+  id            Int       @id @default(autoincrement())
+  title         String    @ipmsDb.VarChar(100)
+  active        Int       @default(1) @ipmsDb.TinyInt
+  department_id Int
+  created_at    DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at    DateTime? @ipmsDb.DateTime(0)
+  deleted_at    DateTime? @ipmsDb.DateTime(0)
+
+  @@index([department_id], map: "department_id")
+}
+
+model cluster_user {
+  id         Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  cluster_id Int       @ipmsDb.UnsignedInt
+  user_id    Int       @ipmsDb.UnsignedInt
+  created_at DateTime? @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.Timestamp(0)
+
+  @@index([cluster_id], map: "cluster_user_cluster_id_foreign")
+  @@index([user_id], map: "cluster_user_user_id_foreign")
+}
+
+model clusters {
+  id             Int                     @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  title          String?                 @ipmsDb.VarChar(255)
+  description    String?                 @ipmsDb.Text
+  current_status clusters_current_status @default(active)
+  deleted_at     DateTime?               @ipmsDb.DateTime(0)
+  created_at     DateTime?               @ipmsDb.Timestamp(0)
+  updated_at     DateTime?               @ipmsDb.Timestamp(0)
+}
+
+model countries {
+  id          Int       @id @default(autoincrement())
+  title       String?   @ipmsDb.VarChar(255)
+  description String?   @ipmsDb.Text
+  active      Int       @default(1) @ipmsDb.TinyInt
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+  created_at  DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime? @ipmsDb.DateTime(0)
+}
+
+model cp_splashes {
+  id                Int       @id @default(autoincrement())
+  file              String?   @ipmsDb.Text
+  approved          Int       @default(0) @ipmsDb.TinyInt
+  view_count        Int       @default(0)
+  currently_visible Int       @default(0)
+  created_at        DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at        DateTime? @ipmsDb.DateTime(0)
+  deleted_at        DateTime? @ipmsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model dashboard_widget {
+  id                       Int                        @id @default(autoincrement())
+  dashboard_id             Int?
+  widget_id                Int?
+  col                      Int?
+  row                      Int?
+  size_x                   Int?
+  size_y                   Int?
+  widget_title             String?                    @ipmsDb.VarChar(200)
+  created_at               DateTime                   @default(now()) @ipmsDb.Timestamp(0)
+  updated_at               DateTime?                  @ipmsDb.DateTime(0)
+  dashboards               dashboards?                @relation(fields: [dashboard_id], references: [id], onDelete: Cascade, map: "dashboard_widget_relation")
+  widgets                  widgets?                   @relation(fields: [widget_id], references: [id], onDelete: Cascade, map: "dashboard_widget_relation_2")
+  dashboard_widget_filters dashboard_widget_filters[]
+
+  @@index([dashboard_id], map: "dashboard_id")
+  @@index([widget_id], map: "widget_id")
+}
+
+model dashboard_widget_filters {
+  id                  Int              @id @default(autoincrement())
+  dashboard_widget_id Int
+  filter_column       String?          @ipmsDb.VarChar(100)
+  created_at          DateTime         @default(now()) @ipmsDb.Timestamp(0)
+  updated_at          DateTime?        @ipmsDb.DateTime(0)
+  dashboard_widget    dashboard_widget @relation(fields: [dashboard_widget_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "dashboard_widget_filter_rel")
+
+  @@index([dashboard_widget_id], map: "dashboard_widget_id")
+}
+
+model dashboards {
+  id               Int                @id @default(autoincrement())
+  title            String?            @ipmsDb.VarChar(100)
+  route            String?            @ipmsDb.VarChar(100)
+  details          String?            @ipmsDb.Text
+  active           Int                @default(1) @ipmsDb.TinyInt
+  created_at       DateTime           @default(now()) @ipmsDb.Timestamp(0)
+  updated_at       DateTime?          @ipmsDb.DateTime(0)
+  deleted_at       DateTime?          @ipmsDb.DateTime(0)
+  dashboard_widget dashboard_widget[]
+}
+
+model ddos {
+  id            Int       @id @default(autoincrement())
+  department_id Int?
+  user_id       Int?
+  title         String?   @ipmsDb.VarChar(200)
+  code          String?   @ipmsDb.VarChar(100)
+  description   String?   @ipmsDb.Text
+  created_at    DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at    DateTime? @ipmsDb.DateTime(0)
+  deleted_at    DateTime? @ipmsDb.DateTime(0)
+}
+
+model department_types {
+  id           Int       @id @default(autoincrement())
+  hierarchy_id Int?
+  title        String    @ipmsDb.VarChar(200)
+  active       Int       @default(1) @ipmsDb.TinyInt
+  created_at   DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at   DateTime? @ipmsDb.DateTime(0)
+  deleted_at   DateTime? @ipmsDb.DateTime(0)
+
+  @@index([hierarchy_id], map: "hierarchy_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model departments {
+  id                     Int        @id @default(autoincrement())
+  department_type_id     Int?
+  hierarchy_id           Int?
+  attached_type          Int?
+  parent_id              Int        @default(0)
+  province_id            Int?
+  division_id            Int?
+  district_id            Int?
+  tehsil_id              Int?
+  title                  String?    @ipmsDb.VarChar(255)
+  description            String?    @ipmsDb.Text
+  active                 Int        @default(1) @ipmsDb.TinyInt
+  created_at             DateTime   @default(now()) @ipmsDb.Timestamp(0)
+  updated_at             DateTime?  @ipmsDb.DateTime(0)
+  deleted_at             DateTime?  @ipmsDb.DateTime(0)
+  old_department_type_id Int?
+  prefix                 String?    @ipmsDb.VarChar(10)
+  pmdu_department_id     Int?
+  sections               sections[]
+
+  @@index([attached_type], map: "attached_type")
+  @@index([department_type_id], map: "department_type_id")
+  @@index([district_id], map: "district_id")
+  @@index([division_id], map: "division_id")
+  @@index([hierarchy_id], map: "hierarchy_id")
+  @@index([parent_id], map: "parent_id")
+  @@index([province_id], map: "province_id")
+  @@index([tehsil_id], map: "tehsil_id")
+}
+
+model designations {
+  id    Int     @id @default(autoincrement()) @ipmsDb.UnsignedSmallInt
+  title String  @ipmsDb.VarChar(50)
+  users users[]
+}
+
+model district_groups {
+  id    Int     @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  title String? @ipmsDb.VarChar(20)
+
+  @@index([title], map: "title")
+}
+
+model districts {
+  id                      Int       @id @default(autoincrement())
+  province_id             Int
+  division_id             Int?
+  title                   String?   @ipmsDb.VarChar(255)
+  urdu_title              String    @ipmsDb.Text
+  latitude                String?   @ipmsDb.VarChar(100)
+  longitude               String?   @ipmsDb.VarChar(100)
+  description             String?   @ipmsDb.Text
+  active                  Int       @default(1) @ipmsDb.TinyInt
+  deleted_at              DateTime? @ipmsDb.DateTime(0)
+  created_at              DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at              DateTime? @ipmsDb.DateTime(0)
+  district_group_id       Int?
+  agriculture_district_id Int?
+  epid_district_id        Int?
+  sort_id                 Int?
+  area                    String?   @ipmsDb.VarChar(10)
+  population_17           String?   @ipmsDb.VarChar(10)
+
+  @@index([division_id], map: "division_id")
+  @@index([province_id], map: "province_id")
+}
+
+model divisions {
+  id          Int       @id @default(autoincrement())
+  province_id Int?
+  title       String?   @ipmsDb.VarChar(100)
+  description String?   @ipmsDb.Text
+  active      Int       @default(1)
+  created_at  DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime? @ipmsDb.DateTime(0)
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+
+  @@index([province_id], map: "province_id")
+}
+
+model failed_jobs {
+  id         BigInt   @id @default(autoincrement()) @ipmsDb.UnsignedBigInt
+  connection String   @ipmsDb.Text
+  queue      String   @ipmsDb.Text
+  payload    String   @ipmsDb.LongText
+  exception  String   @ipmsDb.LongText
+  failed_at  DateTime @default(now()) @ipmsDb.Timestamp(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model fuelling_history {
+  id                    Int       @id @default(autoincrement())
+  vehicle_id            Int
+  fuel_type             Int       @default(1)
+  quantity              Float?    @default(0) @ipmsDb.Float
+  quantity_unauthorized Float     @default(0) @ipmsDb.Float
+  quantity_card         Float?    @default(0) @ipmsDb.Float
+  amount                String?   @ipmsDb.VarChar(10)
+  fuel_date             DateTime? @ipmsDb.DateTime(0)
+  station               Int       @default(1)
+  remarks               String?   @ipmsDb.Text
+  created_at            DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at            DateTime? @ipmsDb.DateTime(0)
+  deleted_at            DateTime? @ipmsDb.DateTime(0)
+}
+
+model hierarchies {
+  id          Int       @id @default(autoincrement())
+  title       String    @ipmsDb.VarChar(100)
+  description String?   @ipmsDb.Text
+  active      Int       @default(1) @ipmsDb.TinyInt
+  created_at  DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  update_at   DateTime? @ipmsDb.DateTime(0)
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+}
+
+model hierarchy_items {
+  id                   Int       @id @default(autoincrement())
+  hierarchy_id         Int
+  parent_id            Int       @default(0)
+  designation_id       Int?
+  designation_sub_id   Int?
+  title                String    @ipmsDb.VarChar(100)
+  description          String?   @ipmsDb.Text
+  home_route           String?   @ipmsDb.VarChar(200)
+  active               Int       @default(1) @ipmsDb.TinyInt
+  created_at           DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at           DateTime? @ipmsDb.DateTime(0)
+  deleted_at           DateTime? @ipmsDb.DateTime(0)
+  requires_province_id Int?      @default(1) @ipmsDb.TinyInt
+  requires_division_id Int?      @default(0) @ipmsDb.TinyInt
+  requires_district_id Int?      @default(0) @ipmsDb.TinyInt
+  requires_tehsil_id   Int?      @default(0) @ipmsDb.TinyInt
+
+  @@index([designation_id], map: "designation_id")
+  @@index([designation_sub_id], map: "designation_sub_id")
+  @@index([hierarchy_id], map: "hierarchy_id")
+  @@index([parent_id], map: "parent_id")
+}
+
+model jobs {
+  id           BigInt @id @default(autoincrement()) @ipmsDb.UnsignedBigInt
+  queue        String @ipmsDb.VarChar(255)
+  payload      String @ipmsDb.LongText
+  attempts     Int    @ipmsDb.UnsignedTinyInt
+  reserved_at  Int?   @ipmsDb.UnsignedInt
+  available_at Int    @ipmsDb.UnsignedInt
+  created_at   Int    @ipmsDb.UnsignedInt
+
+  @@index([queue], map: "jobs_queue_index")
+}
+
+model log_types {
+  id   Int    @id @default(autoincrement()) @ipmsDb.UnsignedTinyInt
+  type String @ipmsDb.VarChar(20)
+}
+
+model maintenance_categories {
+  id         Int       @id @default(autoincrement())
+  parent_id  Int       @default(0)
+  title      String    @ipmsDb.VarChar(200)
+  active     Int       @default(1) @ipmsDb.TinyInt
+  created_at DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.DateTime(0)
+  deleted_at DateTime? @ipmsDb.DateTime(0)
+}
+
+model maintenance_history {
+  id               Int       @id @default(autoincrement())
+  vehicle_id       Int
+  details          String?   @ipmsDb.Text
+  cost             Float?    @ipmsDb.Float
+  mileage          String?   @ipmsDb.VarChar(20)
+  maintenance_date DateTime? @ipmsDb.DateTime(0)
+  mechanic         String?   @ipmsDb.Text
+  returned_at      DateTime? @ipmsDb.DateTime(0)
+  created_at       DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at       DateTime? @ipmsDb.DateTime(0)
+  deleted_at       DateTime? @ipmsDb.DateTime(0)
+}
+
+model maintenance_history_category {
+  id                      Int       @id @default(autoincrement())
+  maintenance_history_id  Int?
+  maintenance_category_id Int?
+  created_at              DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  deleted_at              DateTime? @ipmsDb.DateTime(0)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model migrations {
+  migration String @ipmsDb.VarChar(255)
+  batch     Int
+
+  @@ignore
+}
+
+model models {
+  id              Int       @id @default(autoincrement())
+  brand_id        Int
+  department_id   Int?
+  title           String?   @ipmsDb.VarChar(200)
+  engine_capacity Int?
+  active          Int       @default(1) @ipmsDb.TinyInt
+  created_at      DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at      DateTime? @ipmsDb.DateTime(0)
+  deleted_at      DateTime? @ipmsDb.DateTime(0)
+}
+
+model mouzas {
+  id               Int     @id @default(autoincrement())
+  district         String? @ipmsDb.VarChar(150)
+  tehsil           String? @ipmsDb.VarChar(150)
+  qanongoi         String? @ipmsDb.VarChar(150)
+  patwar_circle    String? @ipmsDb.VarChar(150)
+  title            String? @ipmsDb.VarChar(150)
+  district_id      Int?
+  tehsil_id        Int?
+  qanongoi_id      Int?
+  patwar_circle_id Int?
+  mauza_id         Int?
+}
+
+model mozzas {
+  id               Int       @id @default(autoincrement())
+  tehsil_id        String    @ipmsDb.VarChar(100)
+  qanongoi_id      Int?
+  patwar_circle_id Int?
+  title            String    @ipmsDb.VarChar(200)
+  created_at       DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at       DateTime? @ipmsDb.DateTime(0)
+  deleted_at       DateTime? @ipmsDb.DateTime(0)
+}
+
+model permission_role {
+  role_id       Int         @ipmsDb.UnsignedInt
+  permission_id Int         @ipmsDb.UnsignedSmallInt
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: NoAction, map: "permission_role_permissions_FK")
+  roles         roles       @relation(fields: [role_id], references: [id], onDelete: NoAction, map: "permission_role_roles_FK")
+
+  @@id([permission_id, role_id])
+  @@index([role_id], map: "permission_role_roles_FK")
+}
+
+model permissions {
+  id              Int               @id @default(autoincrement()) @ipmsDb.UnsignedSmallInt
+  name            String            @ipmsDb.VarChar(50)
+  permission_role permission_role[]
+}
+
+model provinces {
+  id          Int       @id @default(autoincrement())
+  country_id  Int
+  title       String?   @ipmsDb.VarChar(255)
+  description String?   @ipmsDb.Text
+  active      Int       @default(1) @ipmsDb.TinyInt
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+  created_at  DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  update_at   DateTime? @ipmsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model proxy_users {
+  id                Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  role_id           Int       @ipmsDb.UnsignedInt
+  hierarchy_item_id Int?
+  employee_id       Int?
+  department_id     Int?
+  user_id           Int?
+  district_id       Int?
+  tehsil_id         Int?
+  dashboard_id      Int?
+  title             String    @ipmsDb.VarChar(200)
+  email             String    @unique(map: "email") @ipmsDb.VarChar(100)
+  username          String    @unique(map: "username") @ipmsDb.VarChar(100)
+  password          String    @ipmsDb.VarChar(100)
+  description       String?   @ipmsDb.Text
+  contact           String?   @ipmsDb.VarChar(20)
+  active            Int?      @default(1) @ipmsDb.TinyInt
+  deleted_at        DateTime? @ipmsDb.DateTime(0)
+  created_at        DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at        DateTime? @ipmsDb.Timestamp(0)
+  dept_path         String?   @ipmsDb.VarChar(200)
+  assigned_apps     String?   @ipmsDb.VarChar(1000)
+
+  @@index([department_id], map: "department_id")
+  @@index([dept_path], map: "dept_path")
+  @@index([title], map: "title")
+  @@index([role_id], map: "users_role_id_foreign")
+}
+
+model roles {
+  id              Int               @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  title           String            @ipmsDb.VarChar(200)
+  level           Int               @ipmsDb.UnsignedInt
+  court_id        Int?
+  description     String?           @ipmsDb.Text
+  active          Int               @default(1) @ipmsDb.TinyInt
+  deleted_at      DateTime?         @ipmsDb.DateTime(0)
+  created_at      DateTime?         @default(now()) @ipmsDb.Timestamp(0)
+  updated_at      DateTime?         @ipmsDb.Timestamp(0)
+  permission_role permission_role[]
+  users           users[]
+}
+
+model sections {
+  id            Int         @id @default(autoincrement())
+  name          String      @ipmsDb.VarChar(50)
+  department_id Int
+  departments   departments @relation(fields: [department_id], references: [id], onDelete: NoAction, map: "sections_departments_FK")
+  users         users[]
+
+  @@index([department_id], map: "sections_departments_FK")
+}
+
+model sessions {
+  id            String  @unique(map: "sessions_id_unique") @ipmsDb.VarChar(255)
+  user_id       Int?
+  ip_address    String? @ipmsDb.VarChar(45)
+  user_agent    String? @ipmsDb.Text
+  payload       String  @ipmsDb.Text
+  last_activity Int
+}
+
+model sms_logs {
+  id          Int                  @id @default(autoincrement())
+  mobile      String?              @ipmsDb.VarChar(20)
+  network     sms_logs_network?
+  sms         String?              @ipmsDb.Text
+  sent_status sms_logs_sent_status @default(pending)
+  sent_at     DateTime?            @ipmsDb.DateTime(0)
+  created_at  DateTime             @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime?            @ipmsDb.DateTime(0)
+  deleted_at  DateTime?            @ipmsDb.DateTime(0)
+}
+
+model stations {
+  id             Int       @id @default(autoincrement())
+  department_id  Int?
+  user_id        Int?
+  title          String?   @ipmsDb.VarChar(200)
+  description    String?   @ipmsDb.Text
+  created_at     DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at     DateTime? @ipmsDb.DateTime(0)
+  deleted_at     DateTime? @ipmsDb.DateTime(0)
+  SUB_STATION_ID String?   @ipmsDb.Text
+  DISTRICT_NAME  String?   @ipmsDb.Text
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tehsils {
+  id          Int       @id @default(autoincrement())
+  district_id Int?
+  title       String?   @ipmsDb.VarChar(100)
+  created_at  DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at  DateTime? @ipmsDb.DateTime(0)
+  deleted_at  DateTime? @ipmsDb.DateTime(0)
+  description String?   @ipmsDb.VarChar(10)
+  is_hq       Boolean   @default(false)
+
+  @@index([district_id], map: "district_id")
+}
+
+model telescope_entries {
+  sequence                BigInt                   @id @default(autoincrement()) @ipmsDb.UnsignedBigInt
+  uuid                    String                   @unique(map: "telescope_entries_uuid_unique") @ipmsDb.Char(36)
+  batch_id                String                   @ipmsDb.Char(36)
+  family_hash             String?                  @ipmsDb.VarChar(255)
+  should_display_on_index Boolean                  @default(true)
+  type                    String                   @ipmsDb.VarChar(20)
+  content                 String                   @ipmsDb.LongText
+  created_at              DateTime?                @ipmsDb.DateTime(0)
+  telescope_entries_tags  telescope_entries_tags[] @ignore
+
+  @@index([batch_id], map: "telescope_entries_batch_id_index")
+  @@index([family_hash], map: "telescope_entries_family_hash_index")
+  @@index([type, should_display_on_index], map: "telescope_entries_type_should_display_on_index_index")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model telescope_entries_tags {
+  entry_uuid        String            @ipmsDb.Char(36)
+  tag               String            @ipmsDb.VarChar(255)
+  telescope_entries telescope_entries @relation(fields: [entry_uuid], references: [uuid], onDelete: Cascade, onUpdate: NoAction, map: "telescope_entries_tags_entry_uuid_foreign")
+
+  @@index([entry_uuid, tag], map: "telescope_entries_tags_entry_uuid_tag_index")
+  @@index([tag], map: "telescope_entries_tags_tag_index")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model telescope_monitoring {
+  tag String @ipmsDb.VarChar(255)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model uc_pakistan {
+  ArrayID        Int?
+  IDCodeT_ID     Int?
+  Tcode          Int?
+  Ucode          Int?
+  DistID         Int?
+  DivID          Int?
+  ProvID         Int?
+  Province       String? @ipmsDb.VarChar(255)
+  Division       String? @ipmsDb.VarChar(255)
+  District       String? @ipmsDb.VarChar(255)
+  RevDate        String? @ipmsDb.VarChar(255)
+  Tier           Int?
+  Tehsil         String? @ipmsDb.VarChar(255)
+  UC             String? @ipmsDb.VarChar(255)
+  Yr             Int?
+  Target_nonCCPV Int?
+  Target_CCPV    Int?
+  Target_SMT     Int?
+  Target_MTAP    Int?
+  IsActive       Int?
+  Remarks        String? @ipmsDb.VarChar(255)
+
+  @@ignore
+}
+
+model union_councils {
+  id         Int       @id @default(autoincrement())
+  tehsil_id  Int?
+  title      String?   @ipmsDb.VarChar(200)
+  population String?   @ipmsDb.VarChar(10)
+  created_at DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.DateTime(0)
+  deleted_at DateTime? @ipmsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_roles {
+  id             Int       @id @default(autoincrement())
+  user_id        Int?
+  child_user_id  Int?
+  child_role_id  Int?
+  child_username String?   @ipmsDb.VarChar(50)
+  created_at     DateTime? @ipmsDb.DateTime(0)
+  updated_at     DateTime? @ipmsDb.Timestamp(0)
+  deleted_at     DateTime? @ipmsDb.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model users {
+  id                         Int           @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  role_id                    Int           @ipmsDb.UnsignedInt
+  username                   String        @unique(map: "username") @ipmsDb.VarChar(100)
+  section_id                 Int?
+  designation_id             Int?          @ipmsDb.UnsignedSmallInt
+  hierarchy_item_id          Int?
+  employee_id                Int?
+  department_id              Int?
+  province_id                Int?
+  division_id                Int?
+  district_id                Int?
+  tehsil_id                  Int?
+  dashboard_id               Int?
+  title                      String        @ipmsDb.VarChar(200)
+  short_title                String?       @ipmsDb.VarChar(50)
+  email                      String        @unique(map: "email") @ipmsDb.VarChar(100)
+  password                   String        @ipmsDb.VarChar(100)
+  description                String?       @ipmsDb.Text
+  contact                    String?       @ipmsDb.VarChar(20)
+  active                     Int?          @default(1) @ipmsDb.TinyInt
+  encrypted_string           String?       @ipmsDb.VarChar(255)
+  encrypted_background       String?       @ipmsDb.VarChar(255)
+  deleted_at                 DateTime?     @ipmsDb.DateTime(0)
+  created_at                 DateTime?     @default(now()) @ipmsDb.Timestamp(0)
+  updated_at                 DateTime?     @ipmsDb.Timestamp(0)
+  password_bkp               String?       @ipmsDb.VarChar(255)
+  password_mandatory_updated Int?          @default(1) @ipmsDb.TinyInt
+  password_hashed            Int?          @default(0) @ipmsDb.TinyInt
+  player_id                  String?       @ipmsDb.Text
+  old_hierarchy_item_id      Int?
+  facility_id                Int?
+  jwt_password               String?       @ipmsDb.Text
+  fcm_web_token              String?       @ipmsDb.Text
+  fcm_mobile_token           String?       @ipmsDb.Text
+  designations               designations? @relation(fields: [designation_id], references: [id], onDelete: NoAction, map: "users_designations_FK")
+  roles                      roles         @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_id_foreign")
+  sections                   sections?     @relation(fields: [section_id], references: [id], onDelete: NoAction, map: "users_sections_FK")
+
+  @@index([tehsil_id], map: "`hierarchy_item_id`\n`employee_id`\ntehsil_id")
+  @@index([department_id], map: "department_id")
+  @@index([district_id], map: "district_id")
+  @@index([division_id], map: "division_id")
+  @@index([employee_id], map: "employee_id")
+  @@index([hierarchy_item_id], map: "hierarchy_item_id")
+  @@index([province_id], map: "province_id")
+  @@index([role_id], map: "role_id")
+  @@index([designation_id], map: "users_designations_FK")
+  @@index([role_id], map: "users_role_id_foreign")
+  @@index([section_id], map: "users_sections_FK")
+}
+
+model users_contacts {
+  id                  Int       @id @default(autoincrement())
+  user_id             Int?
+  department_id       Int?
+  fp_name             String?   @ipmsDb.VarChar(255)
+  fp_designation      String?   @ipmsDb.VarChar(255)
+  fp_mobile           String?   @ipmsDb.VarChar(20)
+  office_phone        String?   @ipmsDb.VarChar(20)
+  officer_name        String?   @ipmsDb.VarChar(255)
+  officer_designation String?   @ipmsDb.VarChar(255)
+  officer_phone       String?   @ipmsDb.VarChar(20)
+  officer_mobile      String?   @ipmsDb.VarChar(20)
+  fp_email            String?   @ipmsDb.VarChar(255)
+  fp_name_it          String?   @ipmsDb.VarChar(255)
+  fp_designation_it   String?   @ipmsDb.VarChar(255)
+  fp_mobile_it        String?   @ipmsDb.VarChar(20)
+  office_phone_it     String?   @ipmsDb.VarChar(20)
+  fp_email_it         String?   @ipmsDb.VarChar(20)
+  created_at          DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at          DateTime? @ipmsDb.DateTime(0)
+  deleted_at          DateTime? @ipmsDb.DateTime(0)
+
+  @@index([department_id], map: "department_id")
+  @@index([user_id], map: "user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model vehicle_allot_history {
+  id             Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  vehicle_id     Int       @ipmsDb.UnsignedInt
+  allotment_type Int       @default(1)
+  category       Int?
+  allotted_to    String    @ipmsDb.Text
+  designation    String?   @ipmsDb.VarChar(100)
+  grade          String?   @ipmsDb.VarChar(100)
+  allotment_date DateTime? @ipmsDb.DateTime(0)
+  days           Int?
+  returned       DateTime? @ipmsDb.DateTime(0)
+  deleted_at     DateTime? @ipmsDb.DateTime(0)
+  created_at     DateTime? @ipmsDb.Timestamp(0)
+  updated_at     DateTime? @ipmsDb.Timestamp(0)
+  vehicles       vehicles  @relation(fields: [vehicle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vehicle_allot_history_vehicle_id_foreign")
+
+  @@index([vehicle_id], map: "vehicle_allot_history_vehicle_id_foreign")
+}
+
+model vehicle_attachments {
+  id         Int       @id @default(autoincrement())
+  vehicle_id Int?
+  title      String?   @ipmsDb.VarChar(255)
+  path       String?   @ipmsDb.Text
+  created_at DateTime  @default(now()) @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.DateTime(0)
+}
+
+model vehicle_photos {
+  id         Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  vehicle_id Int       @ipmsDb.UnsignedInt
+  title      String?   @ipmsDb.VarChar(255)
+  path       String?   @ipmsDb.Text
+  active     Int       @default(1) @ipmsDb.TinyInt
+  deleted_at DateTime? @ipmsDb.DateTime(0)
+  created_at DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at DateTime? @ipmsDb.Timestamp(0)
+  vehicles   vehicles  @relation(fields: [vehicle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vehicle_photos_vehicle_id_foreign")
+
+  @@index([vehicle_id], map: "vehicle_photos_vehicle_id_foreign")
+}
+
+model vehicle_types {
+  id            Int       @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  department_id Int?
+  title         String?   @ipmsDb.VarChar(200)
+  active        Int       @default(1) @ipmsDb.TinyInt
+  deleted_at    DateTime? @ipmsDb.DateTime(0)
+  created_at    DateTime? @default(now()) @ipmsDb.Timestamp(0)
+  updated_at    DateTime? @ipmsDb.Timestamp(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model vehicles {
+  id                    Int                     @id @default(autoincrement()) @ipmsDb.UnsignedInt
+  vehicle_type_id       Int                     @ipmsDb.UnsignedInt
+  model_id              Int?
+  model_year            String?                 @ipmsDb.VarChar(200)
+  department_id         Int                     @ipmsDb.UnsignedInt
+  created_department_id Int?
+  registration_number   String?                 @ipmsDb.VarChar(200)
+  chassis               String?                 @ipmsDb.VarChar(200)
+  condition             Int                     @default(1)
+  registration_status   Int                     @default(3)
+  engine_number         String?                 @ipmsDb.VarChar(100)
+  fuel_type             Int                     @default(1)
+  color                 String?                 @ipmsDb.VarChar(100)
+  remarks               String?                 @ipmsDb.Text
+  active                Int                     @default(1) @ipmsDb.TinyInt
+  deleted_at            DateTime?               @ipmsDb.DateTime(0)
+  created_at            DateTime?               @default(now()) @ipmsDb.Timestamp(0)
+  updated_at            DateTime?               @ipmsDb.Timestamp(0)
+  maintenance_status    Int                     @default(0)
+  vehicle_allot_history vehicle_allot_history[]
+  vehicle_photos        vehicle_photos[]
+
+  @@index([vehicle_type_id], map: "vehicles_vehicle_type_id_foreign")
+}
+
+model widgets {
+  id                Int                @id @default(autoincrement())
+  title             String?            @ipmsDb.VarChar(200)
+  widget_identifier String?            @ipmsDb.VarChar(200)
+  active            Int                @default(1) @ipmsDb.TinyInt
+  description       String?            @ipmsDb.Text
+  created_at        DateTime           @default(now()) @ipmsDb.Timestamp(0)
+  updated_at        DateTime?          @ipmsDb.DateTime(0)
+  deleted_at        DateTime?          @ipmsDb.DateTime(0)
+  dashboard_widget  dashboard_widget[]
+}
+
+enum app_routes_route_type {
+  Initiating_Authority
+  Verifying_Authority
+  Approval_Authority
+  Issuing_Authority
+}
+
+enum sms_logs_network {
+  telenor
+  jazz
+  warid
+  ufone
+  zong
+}
+
+enum app_routes_user_type {
+  Department_User
+  Hierarchy_Item
+}
+
+enum clusters_current_status {
+  active
+  inactive
+}
+
+enum sms_logs_sent_status {
+  pending
+  sent
+}
+
+enum app_routes_user_access_type {
+  Federal
+  Provincial
+  Divisional
+  District
+  Tehsil
+  UC
+  VC
+}

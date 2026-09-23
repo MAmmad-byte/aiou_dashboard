@@ -210,6 +210,49 @@ exports.Prisma.ERP_STATSScalarFieldEnum = {
   deleted_at: 'deleted_at'
 };
 
+exports.Prisma.OAS_TRENDING_STATSScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  program_code: 'program_code',
+  program_title: 'program_title',
+  program_group: 'program_group',
+  intake: 'intake',
+  submitted: 'submitted',
+  not_submitted: 'not_submitted',
+  total: 'total',
+  oas_fee_received: 'oas_fee_received',
+  manual_fee_received: 'manual_fee_received',
+  verified: 'verified',
+  objection: 'objection',
+  pending: 'pending',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.Admissions_STATSScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  semester: 'semester',
+  mode: 'mode',
+  acad_career: 'acad_career',
+  program: 'program',
+  campus: 'campus',
+  province: 'province',
+  program_status: 'program_status',
+  admit_type: 'admit_type',
+  total_students: 'total_students',
+  male: 'male',
+  female: 'female',
+  transgender: 'transgender',
+  fresh_admits: 'fresh_admits',
+  continuing_students: 'continuing_students',
+  total_course_enrollments: 'total_course_enrollments',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
 exports.Prisma.Account_titleScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -722,6 +765,24 @@ exports.Prisma.ERP_STATSOrderByRelevanceFieldEnum = {
   campus: 'campus'
 };
 
+exports.Prisma.OAS_TRENDING_STATSOrderByRelevanceFieldEnum = {
+  program_code: 'program_code',
+  program_title: 'program_title',
+  program_group: 'program_group',
+  intake: 'intake'
+};
+
+exports.Prisma.Admissions_STATSOrderByRelevanceFieldEnum = {
+  semester: 'semester',
+  mode: 'mode',
+  acad_career: 'acad_career',
+  program: 'program',
+  campus: 'campus',
+  province: 'province',
+  program_status: 'program_status',
+  admit_type: 'admit_type'
+};
+
 exports.Prisma.account_titleOrderByRelevanceFieldEnum = {
   title: 'title'
 };
@@ -921,6 +982,8 @@ exports.Prisma.ModelName = {
   CMS_STATS: 'CMS_STATS',
   TMS_STATS: 'TMS_STATS',
   ERP_STATS: 'ERP_STATS',
+  OAS_TRENDING_STATS: 'OAS_TRENDING_STATS',
+  Admissions_STATS: 'Admissions_STATS',
   account_title: 'account_title',
   alerts: 'alerts',
   allowed_users: 'allowed_users',

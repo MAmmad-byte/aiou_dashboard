@@ -34,6 +34,16 @@ export type TMS_STATS = $Result.DefaultSelection<Prisma.$TMS_STATSPayload>
  */
 export type ERP_STATS = $Result.DefaultSelection<Prisma.$ERP_STATSPayload>
 /**
+ * Model OAS_TRENDING_STATS
+ * 
+ */
+export type OAS_TRENDING_STATS = $Result.DefaultSelection<Prisma.$OAS_TRENDING_STATSPayload>
+/**
+ * Model Admissions_STATS
+ * 
+ */
+export type Admissions_STATS = $Result.DefaultSelection<Prisma.$Admissions_STATSPayload>
+/**
  * Model account_title
  * 
  */
@@ -391,6 +401,26 @@ export class PrismaClient<
     * ```
     */
   get eRP_STATS(): Prisma.ERP_STATSDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.oAS_TRENDING_STATS`: Exposes CRUD operations for the **OAS_TRENDING_STATS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OAS_TRENDING_STATS
+    * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findMany()
+    * ```
+    */
+  get oAS_TRENDING_STATS(): Prisma.OAS_TRENDING_STATSDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.admissions_STATS`: Exposes CRUD operations for the **Admissions_STATS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Admissions_STATS
+    * const admissions_STATS = await prisma.admissions_STATS.findMany()
+    * ```
+    */
+  get admissions_STATS(): Prisma.Admissions_STATSDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account_title`: Exposes CRUD operations for the **account_title** model.
@@ -1202,6 +1232,8 @@ export namespace Prisma {
     CMS_STATS: 'CMS_STATS',
     TMS_STATS: 'TMS_STATS',
     ERP_STATS: 'ERP_STATS',
+    OAS_TRENDING_STATS: 'OAS_TRENDING_STATS',
+    Admissions_STATS: 'Admissions_STATS',
     account_title: 'account_title',
     alerts: 'alerts',
     allowed_users: 'allowed_users',
@@ -1253,7 +1285,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "e_OFFICE_STATS" | "cMS_STATS" | "tMS_STATS" | "eRP_STATS" | "account_title" | "alerts" | "allowed_users" | "attachments" | "categories" | "cc" | "cc_tracks" | "citizen_informations" | "department_configs" | "efile_attachments" | "efile_details" | "efile_tracks" | "file_purposes" | "file_statuses" | "file_types" | "flags" | "inquiry_types" | "issue" | "kpi_hierarchy_items" | "kpi_values" | "main_functions" | "main_tasks" | "master_files" | "puc_check_lists" | "puc_efiles" | "puc_master_routes" | "puc_masters" | "puc_track_histories" | "puc_track_outcomes" | "puc_track_paras" | "puc_tracks" | "short_notes" | "temp_attachments" | "user_configs" | "users_infos" | "visitors"
+      modelProps: "e_OFFICE_STATS" | "cMS_STATS" | "tMS_STATS" | "eRP_STATS" | "oAS_TRENDING_STATS" | "admissions_STATS" | "account_title" | "alerts" | "allowed_users" | "attachments" | "categories" | "cc" | "cc_tracks" | "citizen_informations" | "department_configs" | "efile_attachments" | "efile_details" | "efile_tracks" | "file_purposes" | "file_statuses" | "file_types" | "flags" | "inquiry_types" | "issue" | "kpi_hierarchy_items" | "kpi_values" | "main_functions" | "main_tasks" | "master_files" | "puc_check_lists" | "puc_efiles" | "puc_master_routes" | "puc_masters" | "puc_track_histories" | "puc_track_outcomes" | "puc_track_paras" | "puc_tracks" | "short_notes" | "temp_attachments" | "user_configs" | "users_infos" | "visitors"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1518,6 +1550,138 @@ export namespace Prisma {
           count: {
             args: Prisma.ERP_STATSCountArgs<ExtArgs>
             result: $Utils.Optional<ERP_STATSCountAggregateOutputType> | number
+          }
+        }
+      }
+      OAS_TRENDING_STATS: {
+        payload: Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>
+        fields: Prisma.OAS_TRENDING_STATSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OAS_TRENDING_STATSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OAS_TRENDING_STATSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          findFirst: {
+            args: Prisma.OAS_TRENDING_STATSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OAS_TRENDING_STATSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          findMany: {
+            args: Prisma.OAS_TRENDING_STATSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>[]
+          }
+          create: {
+            args: Prisma.OAS_TRENDING_STATSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          createMany: {
+            args: Prisma.OAS_TRENDING_STATSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.OAS_TRENDING_STATSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          update: {
+            args: Prisma.OAS_TRENDING_STATSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          deleteMany: {
+            args: Prisma.OAS_TRENDING_STATSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OAS_TRENDING_STATSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.OAS_TRENDING_STATSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAS_TRENDING_STATSPayload>
+          }
+          aggregate: {
+            args: Prisma.OAS_TRENDING_STATSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOAS_TRENDING_STATS>
+          }
+          groupBy: {
+            args: Prisma.OAS_TRENDING_STATSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OAS_TRENDING_STATSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OAS_TRENDING_STATSCountArgs<ExtArgs>
+            result: $Utils.Optional<OAS_TRENDING_STATSCountAggregateOutputType> | number
+          }
+        }
+      }
+      Admissions_STATS: {
+        payload: Prisma.$Admissions_STATSPayload<ExtArgs>
+        fields: Prisma.Admissions_STATSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Admissions_STATSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Admissions_STATSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          findFirst: {
+            args: Prisma.Admissions_STATSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Admissions_STATSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          findMany: {
+            args: Prisma.Admissions_STATSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>[]
+          }
+          create: {
+            args: Prisma.Admissions_STATSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          createMany: {
+            args: Prisma.Admissions_STATSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.Admissions_STATSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          update: {
+            args: Prisma.Admissions_STATSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          deleteMany: {
+            args: Prisma.Admissions_STATSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Admissions_STATSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.Admissions_STATSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Admissions_STATSPayload>
+          }
+          aggregate: {
+            args: Prisma.Admissions_STATSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdmissions_STATS>
+          }
+          groupBy: {
+            args: Prisma.Admissions_STATSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Admissions_STATSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Admissions_STATSCountArgs<ExtArgs>
+            result: $Utils.Optional<Admissions_STATSCountAggregateOutputType> | number
           }
         }
       }
@@ -4024,6 +4188,8 @@ export namespace Prisma {
     cMS_STATS?: CMS_STATSOmit
     tMS_STATS?: TMS_STATSOmit
     eRP_STATS?: ERP_STATSOmit
+    oAS_TRENDING_STATS?: OAS_TRENDING_STATSOmit
+    admissions_STATS?: Admissions_STATSOmit
     account_title?: account_titleOmit
     alerts?: alertsOmit
     allowed_users?: allowed_usersOmit
@@ -8631,6 +8797,2205 @@ export namespace Prisma {
      * Omit specific fields from the ERP_STATS
      */
     omit?: ERP_STATSOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OAS_TRENDING_STATS
+   */
+
+  export type AggregateOAS_TRENDING_STATS = {
+    _count: OAS_TRENDING_STATSCountAggregateOutputType | null
+    _avg: OAS_TRENDING_STATSAvgAggregateOutputType | null
+    _sum: OAS_TRENDING_STATSSumAggregateOutputType | null
+    _min: OAS_TRENDING_STATSMinAggregateOutputType | null
+    _max: OAS_TRENDING_STATSMaxAggregateOutputType | null
+  }
+
+  export type OAS_TRENDING_STATSAvgAggregateOutputType = {
+    id: number | null
+    submitted: number | null
+    not_submitted: number | null
+    total: number | null
+    oas_fee_received: number | null
+    manual_fee_received: number | null
+    verified: number | null
+    objection: number | null
+    pending: number | null
+  }
+
+  export type OAS_TRENDING_STATSSumAggregateOutputType = {
+    id: number | null
+    submitted: number | null
+    not_submitted: number | null
+    total: number | null
+    oas_fee_received: number | null
+    manual_fee_received: number | null
+    verified: number | null
+    objection: number | null
+    pending: number | null
+  }
+
+  export type OAS_TRENDING_STATSMinAggregateOutputType = {
+    id: number | null
+    date: Date | null
+    program_code: string | null
+    program_title: string | null
+    program_group: string | null
+    intake: string | null
+    submitted: number | null
+    not_submitted: number | null
+    total: number | null
+    oas_fee_received: number | null
+    manual_fee_received: number | null
+    verified: number | null
+    objection: number | null
+    pending: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type OAS_TRENDING_STATSMaxAggregateOutputType = {
+    id: number | null
+    date: Date | null
+    program_code: string | null
+    program_title: string | null
+    program_group: string | null
+    intake: string | null
+    submitted: number | null
+    not_submitted: number | null
+    total: number | null
+    oas_fee_received: number | null
+    manual_fee_received: number | null
+    verified: number | null
+    objection: number | null
+    pending: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type OAS_TRENDING_STATSCountAggregateOutputType = {
+    id: number
+    date: number
+    program_code: number
+    program_title: number
+    program_group: number
+    intake: number
+    submitted: number
+    not_submitted: number
+    total: number
+    oas_fee_received: number
+    manual_fee_received: number
+    verified: number
+    objection: number
+    pending: number
+    created_at: number
+    updated_at: number
+    deleted_at: number
+    _all: number
+  }
+
+
+  export type OAS_TRENDING_STATSAvgAggregateInputType = {
+    id?: true
+    submitted?: true
+    not_submitted?: true
+    total?: true
+    oas_fee_received?: true
+    manual_fee_received?: true
+    verified?: true
+    objection?: true
+    pending?: true
+  }
+
+  export type OAS_TRENDING_STATSSumAggregateInputType = {
+    id?: true
+    submitted?: true
+    not_submitted?: true
+    total?: true
+    oas_fee_received?: true
+    manual_fee_received?: true
+    verified?: true
+    objection?: true
+    pending?: true
+  }
+
+  export type OAS_TRENDING_STATSMinAggregateInputType = {
+    id?: true
+    date?: true
+    program_code?: true
+    program_title?: true
+    program_group?: true
+    intake?: true
+    submitted?: true
+    not_submitted?: true
+    total?: true
+    oas_fee_received?: true
+    manual_fee_received?: true
+    verified?: true
+    objection?: true
+    pending?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type OAS_TRENDING_STATSMaxAggregateInputType = {
+    id?: true
+    date?: true
+    program_code?: true
+    program_title?: true
+    program_group?: true
+    intake?: true
+    submitted?: true
+    not_submitted?: true
+    total?: true
+    oas_fee_received?: true
+    manual_fee_received?: true
+    verified?: true
+    objection?: true
+    pending?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type OAS_TRENDING_STATSCountAggregateInputType = {
+    id?: true
+    date?: true
+    program_code?: true
+    program_title?: true
+    program_group?: true
+    intake?: true
+    submitted?: true
+    not_submitted?: true
+    total?: true
+    oas_fee_received?: true
+    manual_fee_received?: true
+    verified?: true
+    objection?: true
+    pending?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+    _all?: true
+  }
+
+  export type OAS_TRENDING_STATSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAS_TRENDING_STATS to aggregate.
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAS_TRENDING_STATS to fetch.
+     */
+    orderBy?: OAS_TRENDING_STATSOrderByWithRelationInput | OAS_TRENDING_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OAS_TRENDING_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAS_TRENDING_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAS_TRENDING_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OAS_TRENDING_STATS
+    **/
+    _count?: true | OAS_TRENDING_STATSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OAS_TRENDING_STATSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OAS_TRENDING_STATSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OAS_TRENDING_STATSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OAS_TRENDING_STATSMaxAggregateInputType
+  }
+
+  export type GetOAS_TRENDING_STATSAggregateType<T extends OAS_TRENDING_STATSAggregateArgs> = {
+        [P in keyof T & keyof AggregateOAS_TRENDING_STATS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOAS_TRENDING_STATS[P]>
+      : GetScalarType<T[P], AggregateOAS_TRENDING_STATS[P]>
+  }
+
+
+
+
+  export type OAS_TRENDING_STATSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAS_TRENDING_STATSWhereInput
+    orderBy?: OAS_TRENDING_STATSOrderByWithAggregationInput | OAS_TRENDING_STATSOrderByWithAggregationInput[]
+    by: OAS_TRENDING_STATSScalarFieldEnum[] | OAS_TRENDING_STATSScalarFieldEnum
+    having?: OAS_TRENDING_STATSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OAS_TRENDING_STATSCountAggregateInputType | true
+    _avg?: OAS_TRENDING_STATSAvgAggregateInputType
+    _sum?: OAS_TRENDING_STATSSumAggregateInputType
+    _min?: OAS_TRENDING_STATSMinAggregateInputType
+    _max?: OAS_TRENDING_STATSMaxAggregateInputType
+  }
+
+  export type OAS_TRENDING_STATSGroupByOutputType = {
+    id: number
+    date: Date | null
+    program_code: string | null
+    program_title: string | null
+    program_group: string | null
+    intake: string | null
+    submitted: number | null
+    not_submitted: number | null
+    total: number | null
+    oas_fee_received: number | null
+    manual_fee_received: number | null
+    verified: number | null
+    objection: number | null
+    pending: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+    _count: OAS_TRENDING_STATSCountAggregateOutputType | null
+    _avg: OAS_TRENDING_STATSAvgAggregateOutputType | null
+    _sum: OAS_TRENDING_STATSSumAggregateOutputType | null
+    _min: OAS_TRENDING_STATSMinAggregateOutputType | null
+    _max: OAS_TRENDING_STATSMaxAggregateOutputType | null
+  }
+
+  type GetOAS_TRENDING_STATSGroupByPayload<T extends OAS_TRENDING_STATSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OAS_TRENDING_STATSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OAS_TRENDING_STATSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OAS_TRENDING_STATSGroupByOutputType[P]>
+            : GetScalarType<T[P], OAS_TRENDING_STATSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OAS_TRENDING_STATSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    program_code?: boolean
+    program_title?: boolean
+    program_group?: boolean
+    intake?: boolean
+    submitted?: boolean
+    not_submitted?: boolean
+    total?: boolean
+    oas_fee_received?: boolean
+    manual_fee_received?: boolean
+    verified?: boolean
+    objection?: boolean
+    pending?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+  }, ExtArgs["result"]["oAS_TRENDING_STATS"]>
+
+
+
+  export type OAS_TRENDING_STATSSelectScalar = {
+    id?: boolean
+    date?: boolean
+    program_code?: boolean
+    program_title?: boolean
+    program_group?: boolean
+    intake?: boolean
+    submitted?: boolean
+    not_submitted?: boolean
+    total?: boolean
+    oas_fee_received?: boolean
+    manual_fee_received?: boolean
+    verified?: boolean
+    objection?: boolean
+    pending?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+  }
+
+  export type OAS_TRENDING_STATSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "program_code" | "program_title" | "program_group" | "intake" | "submitted" | "not_submitted" | "total" | "oas_fee_received" | "manual_fee_received" | "verified" | "objection" | "pending" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["oAS_TRENDING_STATS"]>
+
+  export type $OAS_TRENDING_STATSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OAS_TRENDING_STATS"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      date: Date | null
+      program_code: string | null
+      program_title: string | null
+      program_group: string | null
+      intake: string | null
+      submitted: number | null
+      not_submitted: number | null
+      total: number | null
+      oas_fee_received: number | null
+      manual_fee_received: number | null
+      verified: number | null
+      objection: number | null
+      pending: number | null
+      created_at: Date | null
+      updated_at: Date | null
+      deleted_at: Date | null
+    }, ExtArgs["result"]["oAS_TRENDING_STATS"]>
+    composites: {}
+  }
+
+  type OAS_TRENDING_STATSGetPayload<S extends boolean | null | undefined | OAS_TRENDING_STATSDefaultArgs> = $Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload, S>
+
+  type OAS_TRENDING_STATSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OAS_TRENDING_STATSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OAS_TRENDING_STATSCountAggregateInputType | true
+    }
+
+  export interface OAS_TRENDING_STATSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAS_TRENDING_STATS'], meta: { name: 'OAS_TRENDING_STATS' } }
+    /**
+     * Find zero or one OAS_TRENDING_STATS that matches the filter.
+     * @param {OAS_TRENDING_STATSFindUniqueArgs} args - Arguments to find a OAS_TRENDING_STATS
+     * @example
+     * // Get one OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OAS_TRENDING_STATSFindUniqueArgs>(args: SelectSubset<T, OAS_TRENDING_STATSFindUniqueArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OAS_TRENDING_STATS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OAS_TRENDING_STATSFindUniqueOrThrowArgs} args - Arguments to find a OAS_TRENDING_STATS
+     * @example
+     * // Get one OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OAS_TRENDING_STATSFindUniqueOrThrowArgs>(args: SelectSubset<T, OAS_TRENDING_STATSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAS_TRENDING_STATS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSFindFirstArgs} args - Arguments to find a OAS_TRENDING_STATS
+     * @example
+     * // Get one OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OAS_TRENDING_STATSFindFirstArgs>(args?: SelectSubset<T, OAS_TRENDING_STATSFindFirstArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAS_TRENDING_STATS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSFindFirstOrThrowArgs} args - Arguments to find a OAS_TRENDING_STATS
+     * @example
+     * // Get one OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OAS_TRENDING_STATSFindFirstOrThrowArgs>(args?: SelectSubset<T, OAS_TRENDING_STATSFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OAS_TRENDING_STATS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findMany()
+     * 
+     * // Get first 10 OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const oAS_TRENDING_STATSWithIdOnly = await prisma.oAS_TRENDING_STATS.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OAS_TRENDING_STATSFindManyArgs>(args?: SelectSubset<T, OAS_TRENDING_STATSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSCreateArgs} args - Arguments to create a OAS_TRENDING_STATS.
+     * @example
+     * // Create one OAS_TRENDING_STATS
+     * const OAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.create({
+     *   data: {
+     *     // ... data to create a OAS_TRENDING_STATS
+     *   }
+     * })
+     * 
+     */
+    create<T extends OAS_TRENDING_STATSCreateArgs>(args: SelectSubset<T, OAS_TRENDING_STATSCreateArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSCreateManyArgs} args - Arguments to create many OAS_TRENDING_STATS.
+     * @example
+     * // Create many OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OAS_TRENDING_STATSCreateManyArgs>(args?: SelectSubset<T, OAS_TRENDING_STATSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSDeleteArgs} args - Arguments to delete one OAS_TRENDING_STATS.
+     * @example
+     * // Delete one OAS_TRENDING_STATS
+     * const OAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.delete({
+     *   where: {
+     *     // ... filter to delete one OAS_TRENDING_STATS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OAS_TRENDING_STATSDeleteArgs>(args: SelectSubset<T, OAS_TRENDING_STATSDeleteArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSUpdateArgs} args - Arguments to update one OAS_TRENDING_STATS.
+     * @example
+     * // Update one OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OAS_TRENDING_STATSUpdateArgs>(args: SelectSubset<T, OAS_TRENDING_STATSUpdateArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSDeleteManyArgs} args - Arguments to filter OAS_TRENDING_STATS to delete.
+     * @example
+     * // Delete a few OAS_TRENDING_STATS
+     * const { count } = await prisma.oAS_TRENDING_STATS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OAS_TRENDING_STATSDeleteManyArgs>(args?: SelectSubset<T, OAS_TRENDING_STATSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OAS_TRENDING_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OAS_TRENDING_STATSUpdateManyArgs>(args: SelectSubset<T, OAS_TRENDING_STATSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OAS_TRENDING_STATS.
+     * @param {OAS_TRENDING_STATSUpsertArgs} args - Arguments to update or create a OAS_TRENDING_STATS.
+     * @example
+     * // Update or create a OAS_TRENDING_STATS
+     * const oAS_TRENDING_STATS = await prisma.oAS_TRENDING_STATS.upsert({
+     *   create: {
+     *     // ... data to create a OAS_TRENDING_STATS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OAS_TRENDING_STATS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OAS_TRENDING_STATSUpsertArgs>(args: SelectSubset<T, OAS_TRENDING_STATSUpsertArgs<ExtArgs>>): Prisma__OAS_TRENDING_STATSClient<$Result.GetResult<Prisma.$OAS_TRENDING_STATSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OAS_TRENDING_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSCountArgs} args - Arguments to filter OAS_TRENDING_STATS to count.
+     * @example
+     * // Count the number of OAS_TRENDING_STATS
+     * const count = await prisma.oAS_TRENDING_STATS.count({
+     *   where: {
+     *     // ... the filter for the OAS_TRENDING_STATS we want to count
+     *   }
+     * })
+    **/
+    count<T extends OAS_TRENDING_STATSCountArgs>(
+      args?: Subset<T, OAS_TRENDING_STATSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OAS_TRENDING_STATSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OAS_TRENDING_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OAS_TRENDING_STATSAggregateArgs>(args: Subset<T, OAS_TRENDING_STATSAggregateArgs>): Prisma.PrismaPromise<GetOAS_TRENDING_STATSAggregateType<T>>
+
+    /**
+     * Group by OAS_TRENDING_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAS_TRENDING_STATSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OAS_TRENDING_STATSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OAS_TRENDING_STATSGroupByArgs['orderBy'] }
+        : { orderBy?: OAS_TRENDING_STATSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OAS_TRENDING_STATSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAS_TRENDING_STATSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OAS_TRENDING_STATS model
+   */
+  readonly fields: OAS_TRENDING_STATSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OAS_TRENDING_STATS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OAS_TRENDING_STATSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OAS_TRENDING_STATS model
+   */
+  interface OAS_TRENDING_STATSFieldRefs {
+    readonly id: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly date: FieldRef<"OAS_TRENDING_STATS", 'DateTime'>
+    readonly program_code: FieldRef<"OAS_TRENDING_STATS", 'String'>
+    readonly program_title: FieldRef<"OAS_TRENDING_STATS", 'String'>
+    readonly program_group: FieldRef<"OAS_TRENDING_STATS", 'String'>
+    readonly intake: FieldRef<"OAS_TRENDING_STATS", 'String'>
+    readonly submitted: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly not_submitted: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly total: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly oas_fee_received: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly manual_fee_received: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly verified: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly objection: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly pending: FieldRef<"OAS_TRENDING_STATS", 'Int'>
+    readonly created_at: FieldRef<"OAS_TRENDING_STATS", 'DateTime'>
+    readonly updated_at: FieldRef<"OAS_TRENDING_STATS", 'DateTime'>
+    readonly deleted_at: FieldRef<"OAS_TRENDING_STATS", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OAS_TRENDING_STATS findUnique
+   */
+  export type OAS_TRENDING_STATSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which OAS_TRENDING_STATS to fetch.
+     */
+    where: OAS_TRENDING_STATSWhereUniqueInput
+  }
+
+  /**
+   * OAS_TRENDING_STATS findUniqueOrThrow
+   */
+  export type OAS_TRENDING_STATSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which OAS_TRENDING_STATS to fetch.
+     */
+    where: OAS_TRENDING_STATSWhereUniqueInput
+  }
+
+  /**
+   * OAS_TRENDING_STATS findFirst
+   */
+  export type OAS_TRENDING_STATSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which OAS_TRENDING_STATS to fetch.
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAS_TRENDING_STATS to fetch.
+     */
+    orderBy?: OAS_TRENDING_STATSOrderByWithRelationInput | OAS_TRENDING_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAS_TRENDING_STATS.
+     */
+    cursor?: OAS_TRENDING_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAS_TRENDING_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAS_TRENDING_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAS_TRENDING_STATS.
+     */
+    distinct?: OAS_TRENDING_STATSScalarFieldEnum | OAS_TRENDING_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * OAS_TRENDING_STATS findFirstOrThrow
+   */
+  export type OAS_TRENDING_STATSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which OAS_TRENDING_STATS to fetch.
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAS_TRENDING_STATS to fetch.
+     */
+    orderBy?: OAS_TRENDING_STATSOrderByWithRelationInput | OAS_TRENDING_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAS_TRENDING_STATS.
+     */
+    cursor?: OAS_TRENDING_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAS_TRENDING_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAS_TRENDING_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAS_TRENDING_STATS.
+     */
+    distinct?: OAS_TRENDING_STATSScalarFieldEnum | OAS_TRENDING_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * OAS_TRENDING_STATS findMany
+   */
+  export type OAS_TRENDING_STATSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which OAS_TRENDING_STATS to fetch.
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAS_TRENDING_STATS to fetch.
+     */
+    orderBy?: OAS_TRENDING_STATSOrderByWithRelationInput | OAS_TRENDING_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OAS_TRENDING_STATS.
+     */
+    cursor?: OAS_TRENDING_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAS_TRENDING_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAS_TRENDING_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAS_TRENDING_STATS.
+     */
+    distinct?: OAS_TRENDING_STATSScalarFieldEnum | OAS_TRENDING_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * OAS_TRENDING_STATS create
+   */
+  export type OAS_TRENDING_STATSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * The data needed to create a OAS_TRENDING_STATS.
+     */
+    data?: XOR<OAS_TRENDING_STATSCreateInput, OAS_TRENDING_STATSUncheckedCreateInput>
+  }
+
+  /**
+   * OAS_TRENDING_STATS createMany
+   */
+  export type OAS_TRENDING_STATSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OAS_TRENDING_STATS.
+     */
+    data: OAS_TRENDING_STATSCreateManyInput | OAS_TRENDING_STATSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OAS_TRENDING_STATS update
+   */
+  export type OAS_TRENDING_STATSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * The data needed to update a OAS_TRENDING_STATS.
+     */
+    data: XOR<OAS_TRENDING_STATSUpdateInput, OAS_TRENDING_STATSUncheckedUpdateInput>
+    /**
+     * Choose, which OAS_TRENDING_STATS to update.
+     */
+    where: OAS_TRENDING_STATSWhereUniqueInput
+  }
+
+  /**
+   * OAS_TRENDING_STATS updateMany
+   */
+  export type OAS_TRENDING_STATSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OAS_TRENDING_STATS.
+     */
+    data: XOR<OAS_TRENDING_STATSUpdateManyMutationInput, OAS_TRENDING_STATSUncheckedUpdateManyInput>
+    /**
+     * Filter which OAS_TRENDING_STATS to update
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * Limit how many OAS_TRENDING_STATS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAS_TRENDING_STATS upsert
+   */
+  export type OAS_TRENDING_STATSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * The filter to search for the OAS_TRENDING_STATS to update in case it exists.
+     */
+    where: OAS_TRENDING_STATSWhereUniqueInput
+    /**
+     * In case the OAS_TRENDING_STATS found by the `where` argument doesn't exist, create a new OAS_TRENDING_STATS with this data.
+     */
+    create: XOR<OAS_TRENDING_STATSCreateInput, OAS_TRENDING_STATSUncheckedCreateInput>
+    /**
+     * In case the OAS_TRENDING_STATS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OAS_TRENDING_STATSUpdateInput, OAS_TRENDING_STATSUncheckedUpdateInput>
+  }
+
+  /**
+   * OAS_TRENDING_STATS delete
+   */
+  export type OAS_TRENDING_STATSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+    /**
+     * Filter which OAS_TRENDING_STATS to delete.
+     */
+    where: OAS_TRENDING_STATSWhereUniqueInput
+  }
+
+  /**
+   * OAS_TRENDING_STATS deleteMany
+   */
+  export type OAS_TRENDING_STATSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAS_TRENDING_STATS to delete
+     */
+    where?: OAS_TRENDING_STATSWhereInput
+    /**
+     * Limit how many OAS_TRENDING_STATS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAS_TRENDING_STATS without action
+   */
+  export type OAS_TRENDING_STATSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAS_TRENDING_STATS
+     */
+    select?: OAS_TRENDING_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAS_TRENDING_STATS
+     */
+    omit?: OAS_TRENDING_STATSOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Admissions_STATS
+   */
+
+  export type AggregateAdmissions_STATS = {
+    _count: Admissions_STATSCountAggregateOutputType | null
+    _avg: Admissions_STATSAvgAggregateOutputType | null
+    _sum: Admissions_STATSSumAggregateOutputType | null
+    _min: Admissions_STATSMinAggregateOutputType | null
+    _max: Admissions_STATSMaxAggregateOutputType | null
+  }
+
+  export type Admissions_STATSAvgAggregateOutputType = {
+    id: number | null
+    total_students: number | null
+    male: number | null
+    female: number | null
+    transgender: number | null
+    fresh_admits: number | null
+    continuing_students: number | null
+    total_course_enrollments: number | null
+  }
+
+  export type Admissions_STATSSumAggregateOutputType = {
+    id: number | null
+    total_students: number | null
+    male: number | null
+    female: number | null
+    transgender: number | null
+    fresh_admits: number | null
+    continuing_students: number | null
+    total_course_enrollments: number | null
+  }
+
+  export type Admissions_STATSMinAggregateOutputType = {
+    id: number | null
+    date: Date | null
+    semester: string | null
+    mode: string | null
+    acad_career: string | null
+    program: string | null
+    campus: string | null
+    province: string | null
+    program_status: string | null
+    admit_type: string | null
+    total_students: number | null
+    male: number | null
+    female: number | null
+    transgender: number | null
+    fresh_admits: number | null
+    continuing_students: number | null
+    total_course_enrollments: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type Admissions_STATSMaxAggregateOutputType = {
+    id: number | null
+    date: Date | null
+    semester: string | null
+    mode: string | null
+    acad_career: string | null
+    program: string | null
+    campus: string | null
+    province: string | null
+    program_status: string | null
+    admit_type: string | null
+    total_students: number | null
+    male: number | null
+    female: number | null
+    transgender: number | null
+    fresh_admits: number | null
+    continuing_students: number | null
+    total_course_enrollments: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type Admissions_STATSCountAggregateOutputType = {
+    id: number
+    date: number
+    semester: number
+    mode: number
+    acad_career: number
+    program: number
+    campus: number
+    province: number
+    program_status: number
+    admit_type: number
+    total_students: number
+    male: number
+    female: number
+    transgender: number
+    fresh_admits: number
+    continuing_students: number
+    total_course_enrollments: number
+    created_at: number
+    updated_at: number
+    deleted_at: number
+    _all: number
+  }
+
+
+  export type Admissions_STATSAvgAggregateInputType = {
+    id?: true
+    total_students?: true
+    male?: true
+    female?: true
+    transgender?: true
+    fresh_admits?: true
+    continuing_students?: true
+    total_course_enrollments?: true
+  }
+
+  export type Admissions_STATSSumAggregateInputType = {
+    id?: true
+    total_students?: true
+    male?: true
+    female?: true
+    transgender?: true
+    fresh_admits?: true
+    continuing_students?: true
+    total_course_enrollments?: true
+  }
+
+  export type Admissions_STATSMinAggregateInputType = {
+    id?: true
+    date?: true
+    semester?: true
+    mode?: true
+    acad_career?: true
+    program?: true
+    campus?: true
+    province?: true
+    program_status?: true
+    admit_type?: true
+    total_students?: true
+    male?: true
+    female?: true
+    transgender?: true
+    fresh_admits?: true
+    continuing_students?: true
+    total_course_enrollments?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type Admissions_STATSMaxAggregateInputType = {
+    id?: true
+    date?: true
+    semester?: true
+    mode?: true
+    acad_career?: true
+    program?: true
+    campus?: true
+    province?: true
+    program_status?: true
+    admit_type?: true
+    total_students?: true
+    male?: true
+    female?: true
+    transgender?: true
+    fresh_admits?: true
+    continuing_students?: true
+    total_course_enrollments?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type Admissions_STATSCountAggregateInputType = {
+    id?: true
+    date?: true
+    semester?: true
+    mode?: true
+    acad_career?: true
+    program?: true
+    campus?: true
+    province?: true
+    program_status?: true
+    admit_type?: true
+    total_students?: true
+    male?: true
+    female?: true
+    transgender?: true
+    fresh_admits?: true
+    continuing_students?: true
+    total_course_enrollments?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+    _all?: true
+  }
+
+  export type Admissions_STATSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admissions_STATS to aggregate.
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admissions_STATS to fetch.
+     */
+    orderBy?: Admissions_STATSOrderByWithRelationInput | Admissions_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Admissions_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admissions_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admissions_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Admissions_STATS
+    **/
+    _count?: true | Admissions_STATSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Admissions_STATSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Admissions_STATSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Admissions_STATSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Admissions_STATSMaxAggregateInputType
+  }
+
+  export type GetAdmissions_STATSAggregateType<T extends Admissions_STATSAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdmissions_STATS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdmissions_STATS[P]>
+      : GetScalarType<T[P], AggregateAdmissions_STATS[P]>
+  }
+
+
+
+
+  export type Admissions_STATSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Admissions_STATSWhereInput
+    orderBy?: Admissions_STATSOrderByWithAggregationInput | Admissions_STATSOrderByWithAggregationInput[]
+    by: Admissions_STATSScalarFieldEnum[] | Admissions_STATSScalarFieldEnum
+    having?: Admissions_STATSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Admissions_STATSCountAggregateInputType | true
+    _avg?: Admissions_STATSAvgAggregateInputType
+    _sum?: Admissions_STATSSumAggregateInputType
+    _min?: Admissions_STATSMinAggregateInputType
+    _max?: Admissions_STATSMaxAggregateInputType
+  }
+
+  export type Admissions_STATSGroupByOutputType = {
+    id: number
+    date: Date | null
+    semester: string | null
+    mode: string | null
+    acad_career: string | null
+    program: string | null
+    campus: string | null
+    province: string | null
+    program_status: string | null
+    admit_type: string | null
+    total_students: number | null
+    male: number | null
+    female: number | null
+    transgender: number | null
+    fresh_admits: number | null
+    continuing_students: number | null
+    total_course_enrollments: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+    _count: Admissions_STATSCountAggregateOutputType | null
+    _avg: Admissions_STATSAvgAggregateOutputType | null
+    _sum: Admissions_STATSSumAggregateOutputType | null
+    _min: Admissions_STATSMinAggregateOutputType | null
+    _max: Admissions_STATSMaxAggregateOutputType | null
+  }
+
+  type GetAdmissions_STATSGroupByPayload<T extends Admissions_STATSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Admissions_STATSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Admissions_STATSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Admissions_STATSGroupByOutputType[P]>
+            : GetScalarType<T[P], Admissions_STATSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Admissions_STATSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    semester?: boolean
+    mode?: boolean
+    acad_career?: boolean
+    program?: boolean
+    campus?: boolean
+    province?: boolean
+    program_status?: boolean
+    admit_type?: boolean
+    total_students?: boolean
+    male?: boolean
+    female?: boolean
+    transgender?: boolean
+    fresh_admits?: boolean
+    continuing_students?: boolean
+    total_course_enrollments?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+  }, ExtArgs["result"]["admissions_STATS"]>
+
+
+
+  export type Admissions_STATSSelectScalar = {
+    id?: boolean
+    date?: boolean
+    semester?: boolean
+    mode?: boolean
+    acad_career?: boolean
+    program?: boolean
+    campus?: boolean
+    province?: boolean
+    program_status?: boolean
+    admit_type?: boolean
+    total_students?: boolean
+    male?: boolean
+    female?: boolean
+    transgender?: boolean
+    fresh_admits?: boolean
+    continuing_students?: boolean
+    total_course_enrollments?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+  }
+
+  export type Admissions_STATSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "semester" | "mode" | "acad_career" | "program" | "campus" | "province" | "program_status" | "admit_type" | "total_students" | "male" | "female" | "transgender" | "fresh_admits" | "continuing_students" | "total_course_enrollments" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["admissions_STATS"]>
+
+  export type $Admissions_STATSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Admissions_STATS"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      date: Date | null
+      semester: string | null
+      mode: string | null
+      acad_career: string | null
+      program: string | null
+      campus: string | null
+      province: string | null
+      program_status: string | null
+      admit_type: string | null
+      total_students: number | null
+      male: number | null
+      female: number | null
+      transgender: number | null
+      fresh_admits: number | null
+      continuing_students: number | null
+      total_course_enrollments: number | null
+      created_at: Date | null
+      updated_at: Date | null
+      deleted_at: Date | null
+    }, ExtArgs["result"]["admissions_STATS"]>
+    composites: {}
+  }
+
+  type Admissions_STATSGetPayload<S extends boolean | null | undefined | Admissions_STATSDefaultArgs> = $Result.GetResult<Prisma.$Admissions_STATSPayload, S>
+
+  type Admissions_STATSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Admissions_STATSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Admissions_STATSCountAggregateInputType | true
+    }
+
+  export interface Admissions_STATSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Admissions_STATS'], meta: { name: 'Admissions_STATS' } }
+    /**
+     * Find zero or one Admissions_STATS that matches the filter.
+     * @param {Admissions_STATSFindUniqueArgs} args - Arguments to find a Admissions_STATS
+     * @example
+     * // Get one Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Admissions_STATSFindUniqueArgs>(args: SelectSubset<T, Admissions_STATSFindUniqueArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Admissions_STATS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Admissions_STATSFindUniqueOrThrowArgs} args - Arguments to find a Admissions_STATS
+     * @example
+     * // Get one Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Admissions_STATSFindUniqueOrThrowArgs>(args: SelectSubset<T, Admissions_STATSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admissions_STATS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSFindFirstArgs} args - Arguments to find a Admissions_STATS
+     * @example
+     * // Get one Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Admissions_STATSFindFirstArgs>(args?: SelectSubset<T, Admissions_STATSFindFirstArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admissions_STATS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSFindFirstOrThrowArgs} args - Arguments to find a Admissions_STATS
+     * @example
+     * // Get one Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Admissions_STATSFindFirstOrThrowArgs>(args?: SelectSubset<T, Admissions_STATSFindFirstOrThrowArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Admissions_STATS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findMany()
+     * 
+     * // Get first 10 Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const admissions_STATSWithIdOnly = await prisma.admissions_STATS.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Admissions_STATSFindManyArgs>(args?: SelectSubset<T, Admissions_STATSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Admissions_STATS.
+     * @param {Admissions_STATSCreateArgs} args - Arguments to create a Admissions_STATS.
+     * @example
+     * // Create one Admissions_STATS
+     * const Admissions_STATS = await prisma.admissions_STATS.create({
+     *   data: {
+     *     // ... data to create a Admissions_STATS
+     *   }
+     * })
+     * 
+     */
+    create<T extends Admissions_STATSCreateArgs>(args: SelectSubset<T, Admissions_STATSCreateArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Admissions_STATS.
+     * @param {Admissions_STATSCreateManyArgs} args - Arguments to create many Admissions_STATS.
+     * @example
+     * // Create many Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Admissions_STATSCreateManyArgs>(args?: SelectSubset<T, Admissions_STATSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Admissions_STATS.
+     * @param {Admissions_STATSDeleteArgs} args - Arguments to delete one Admissions_STATS.
+     * @example
+     * // Delete one Admissions_STATS
+     * const Admissions_STATS = await prisma.admissions_STATS.delete({
+     *   where: {
+     *     // ... filter to delete one Admissions_STATS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Admissions_STATSDeleteArgs>(args: SelectSubset<T, Admissions_STATSDeleteArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Admissions_STATS.
+     * @param {Admissions_STATSUpdateArgs} args - Arguments to update one Admissions_STATS.
+     * @example
+     * // Update one Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Admissions_STATSUpdateArgs>(args: SelectSubset<T, Admissions_STATSUpdateArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Admissions_STATS.
+     * @param {Admissions_STATSDeleteManyArgs} args - Arguments to filter Admissions_STATS to delete.
+     * @example
+     * // Delete a few Admissions_STATS
+     * const { count } = await prisma.admissions_STATS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Admissions_STATSDeleteManyArgs>(args?: SelectSubset<T, Admissions_STATSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Admissions_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Admissions_STATSUpdateManyArgs>(args: SelectSubset<T, Admissions_STATSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Admissions_STATS.
+     * @param {Admissions_STATSUpsertArgs} args - Arguments to update or create a Admissions_STATS.
+     * @example
+     * // Update or create a Admissions_STATS
+     * const admissions_STATS = await prisma.admissions_STATS.upsert({
+     *   create: {
+     *     // ... data to create a Admissions_STATS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Admissions_STATS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Admissions_STATSUpsertArgs>(args: SelectSubset<T, Admissions_STATSUpsertArgs<ExtArgs>>): Prisma__Admissions_STATSClient<$Result.GetResult<Prisma.$Admissions_STATSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Admissions_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSCountArgs} args - Arguments to filter Admissions_STATS to count.
+     * @example
+     * // Count the number of Admissions_STATS
+     * const count = await prisma.admissions_STATS.count({
+     *   where: {
+     *     // ... the filter for the Admissions_STATS we want to count
+     *   }
+     * })
+    **/
+    count<T extends Admissions_STATSCountArgs>(
+      args?: Subset<T, Admissions_STATSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Admissions_STATSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Admissions_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Admissions_STATSAggregateArgs>(args: Subset<T, Admissions_STATSAggregateArgs>): Prisma.PrismaPromise<GetAdmissions_STATSAggregateType<T>>
+
+    /**
+     * Group by Admissions_STATS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Admissions_STATSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Admissions_STATSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Admissions_STATSGroupByArgs['orderBy'] }
+        : { orderBy?: Admissions_STATSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Admissions_STATSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdmissions_STATSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Admissions_STATS model
+   */
+  readonly fields: Admissions_STATSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Admissions_STATS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Admissions_STATSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Admissions_STATS model
+   */
+  interface Admissions_STATSFieldRefs {
+    readonly id: FieldRef<"Admissions_STATS", 'Int'>
+    readonly date: FieldRef<"Admissions_STATS", 'DateTime'>
+    readonly semester: FieldRef<"Admissions_STATS", 'String'>
+    readonly mode: FieldRef<"Admissions_STATS", 'String'>
+    readonly acad_career: FieldRef<"Admissions_STATS", 'String'>
+    readonly program: FieldRef<"Admissions_STATS", 'String'>
+    readonly campus: FieldRef<"Admissions_STATS", 'String'>
+    readonly province: FieldRef<"Admissions_STATS", 'String'>
+    readonly program_status: FieldRef<"Admissions_STATS", 'String'>
+    readonly admit_type: FieldRef<"Admissions_STATS", 'String'>
+    readonly total_students: FieldRef<"Admissions_STATS", 'Int'>
+    readonly male: FieldRef<"Admissions_STATS", 'Int'>
+    readonly female: FieldRef<"Admissions_STATS", 'Int'>
+    readonly transgender: FieldRef<"Admissions_STATS", 'Int'>
+    readonly fresh_admits: FieldRef<"Admissions_STATS", 'Int'>
+    readonly continuing_students: FieldRef<"Admissions_STATS", 'Int'>
+    readonly total_course_enrollments: FieldRef<"Admissions_STATS", 'Int'>
+    readonly created_at: FieldRef<"Admissions_STATS", 'DateTime'>
+    readonly updated_at: FieldRef<"Admissions_STATS", 'DateTime'>
+    readonly deleted_at: FieldRef<"Admissions_STATS", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Admissions_STATS findUnique
+   */
+  export type Admissions_STATSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which Admissions_STATS to fetch.
+     */
+    where: Admissions_STATSWhereUniqueInput
+  }
+
+  /**
+   * Admissions_STATS findUniqueOrThrow
+   */
+  export type Admissions_STATSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which Admissions_STATS to fetch.
+     */
+    where: Admissions_STATSWhereUniqueInput
+  }
+
+  /**
+   * Admissions_STATS findFirst
+   */
+  export type Admissions_STATSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which Admissions_STATS to fetch.
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admissions_STATS to fetch.
+     */
+    orderBy?: Admissions_STATSOrderByWithRelationInput | Admissions_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admissions_STATS.
+     */
+    cursor?: Admissions_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admissions_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admissions_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admissions_STATS.
+     */
+    distinct?: Admissions_STATSScalarFieldEnum | Admissions_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * Admissions_STATS findFirstOrThrow
+   */
+  export type Admissions_STATSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which Admissions_STATS to fetch.
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admissions_STATS to fetch.
+     */
+    orderBy?: Admissions_STATSOrderByWithRelationInput | Admissions_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admissions_STATS.
+     */
+    cursor?: Admissions_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admissions_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admissions_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admissions_STATS.
+     */
+    distinct?: Admissions_STATSScalarFieldEnum | Admissions_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * Admissions_STATS findMany
+   */
+  export type Admissions_STATSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter, which Admissions_STATS to fetch.
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admissions_STATS to fetch.
+     */
+    orderBy?: Admissions_STATSOrderByWithRelationInput | Admissions_STATSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Admissions_STATS.
+     */
+    cursor?: Admissions_STATSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admissions_STATS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admissions_STATS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admissions_STATS.
+     */
+    distinct?: Admissions_STATSScalarFieldEnum | Admissions_STATSScalarFieldEnum[]
+  }
+
+  /**
+   * Admissions_STATS create
+   */
+  export type Admissions_STATSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Admissions_STATS.
+     */
+    data?: XOR<Admissions_STATSCreateInput, Admissions_STATSUncheckedCreateInput>
+  }
+
+  /**
+   * Admissions_STATS createMany
+   */
+  export type Admissions_STATSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Admissions_STATS.
+     */
+    data: Admissions_STATSCreateManyInput | Admissions_STATSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Admissions_STATS update
+   */
+  export type Admissions_STATSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Admissions_STATS.
+     */
+    data: XOR<Admissions_STATSUpdateInput, Admissions_STATSUncheckedUpdateInput>
+    /**
+     * Choose, which Admissions_STATS to update.
+     */
+    where: Admissions_STATSWhereUniqueInput
+  }
+
+  /**
+   * Admissions_STATS updateMany
+   */
+  export type Admissions_STATSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Admissions_STATS.
+     */
+    data: XOR<Admissions_STATSUpdateManyMutationInput, Admissions_STATSUncheckedUpdateManyInput>
+    /**
+     * Filter which Admissions_STATS to update
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * Limit how many Admissions_STATS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admissions_STATS upsert
+   */
+  export type Admissions_STATSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Admissions_STATS to update in case it exists.
+     */
+    where: Admissions_STATSWhereUniqueInput
+    /**
+     * In case the Admissions_STATS found by the `where` argument doesn't exist, create a new Admissions_STATS with this data.
+     */
+    create: XOR<Admissions_STATSCreateInput, Admissions_STATSUncheckedCreateInput>
+    /**
+     * In case the Admissions_STATS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Admissions_STATSUpdateInput, Admissions_STATSUncheckedUpdateInput>
+  }
+
+  /**
+   * Admissions_STATS delete
+   */
+  export type Admissions_STATSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
+    /**
+     * Filter which Admissions_STATS to delete.
+     */
+    where: Admissions_STATSWhereUniqueInput
+  }
+
+  /**
+   * Admissions_STATS deleteMany
+   */
+  export type Admissions_STATSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admissions_STATS to delete
+     */
+    where?: Admissions_STATSWhereInput
+    /**
+     * Limit how many Admissions_STATS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admissions_STATS without action
+   */
+  export type Admissions_STATSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admissions_STATS
+     */
+    select?: Admissions_STATSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admissions_STATS
+     */
+    omit?: Admissions_STATSOmit<ExtArgs> | null
   }
 
 
@@ -44427,6 +46792,55 @@ export namespace Prisma {
   export type ERP_STATSScalarFieldEnum = (typeof ERP_STATSScalarFieldEnum)[keyof typeof ERP_STATSScalarFieldEnum]
 
 
+  export const OAS_TRENDING_STATSScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    program_code: 'program_code',
+    program_title: 'program_title',
+    program_group: 'program_group',
+    intake: 'intake',
+    submitted: 'submitted',
+    not_submitted: 'not_submitted',
+    total: 'total',
+    oas_fee_received: 'oas_fee_received',
+    manual_fee_received: 'manual_fee_received',
+    verified: 'verified',
+    objection: 'objection',
+    pending: 'pending',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    deleted_at: 'deleted_at'
+  };
+
+  export type OAS_TRENDING_STATSScalarFieldEnum = (typeof OAS_TRENDING_STATSScalarFieldEnum)[keyof typeof OAS_TRENDING_STATSScalarFieldEnum]
+
+
+  export const Admissions_STATSScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    semester: 'semester',
+    mode: 'mode',
+    acad_career: 'acad_career',
+    program: 'program',
+    campus: 'campus',
+    province: 'province',
+    program_status: 'program_status',
+    admit_type: 'admit_type',
+    total_students: 'total_students',
+    male: 'male',
+    female: 'female',
+    transgender: 'transgender',
+    fresh_admits: 'fresh_admits',
+    continuing_students: 'continuing_students',
+    total_course_enrollments: 'total_course_enrollments',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    deleted_at: 'deleted_at'
+  };
+
+  export type Admissions_STATSScalarFieldEnum = (typeof Admissions_STATSScalarFieldEnum)[keyof typeof Admissions_STATSScalarFieldEnum]
+
+
   export const Account_titleScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -45063,6 +47477,30 @@ export namespace Prisma {
   };
 
   export type ERP_STATSOrderByRelevanceFieldEnum = (typeof ERP_STATSOrderByRelevanceFieldEnum)[keyof typeof ERP_STATSOrderByRelevanceFieldEnum]
+
+
+  export const OAS_TRENDING_STATSOrderByRelevanceFieldEnum: {
+    program_code: 'program_code',
+    program_title: 'program_title',
+    program_group: 'program_group',
+    intake: 'intake'
+  };
+
+  export type OAS_TRENDING_STATSOrderByRelevanceFieldEnum = (typeof OAS_TRENDING_STATSOrderByRelevanceFieldEnum)[keyof typeof OAS_TRENDING_STATSOrderByRelevanceFieldEnum]
+
+
+  export const Admissions_STATSOrderByRelevanceFieldEnum: {
+    semester: 'semester',
+    mode: 'mode',
+    acad_career: 'acad_career',
+    program: 'program',
+    campus: 'campus',
+    province: 'province',
+    program_status: 'program_status',
+    admit_type: 'admit_type'
+  };
+
+  export type Admissions_STATSOrderByRelevanceFieldEnum = (typeof Admissions_STATSOrderByRelevanceFieldEnum)[keyof typeof Admissions_STATSOrderByRelevanceFieldEnum]
 
 
   export const account_titleOrderByRelevanceFieldEnum: {
@@ -45916,6 +48354,251 @@ export namespace Prisma {
     created_at?: DateTimeNullableWithAggregatesFilter<"ERP_STATS"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"ERP_STATS"> | Date | string | null
     deleted_at?: DateTimeNullableWithAggregatesFilter<"ERP_STATS"> | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSWhereInput = {
+    AND?: OAS_TRENDING_STATSWhereInput | OAS_TRENDING_STATSWhereInput[]
+    OR?: OAS_TRENDING_STATSWhereInput[]
+    NOT?: OAS_TRENDING_STATSWhereInput | OAS_TRENDING_STATSWhereInput[]
+    id?: IntFilter<"OAS_TRENDING_STATS"> | number
+    date?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    program_code?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    program_title?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    program_group?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    intake?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    submitted?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    not_submitted?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    total?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    oas_fee_received?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    manual_fee_received?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    verified?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    objection?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    pending?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    created_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrderInput | SortOrder
+    program_code?: SortOrderInput | SortOrder
+    program_title?: SortOrderInput | SortOrder
+    program_group?: SortOrderInput | SortOrder
+    intake?: SortOrderInput | SortOrder
+    submitted?: SortOrderInput | SortOrder
+    not_submitted?: SortOrderInput | SortOrder
+    total?: SortOrderInput | SortOrder
+    oas_fee_received?: SortOrderInput | SortOrder
+    manual_fee_received?: SortOrderInput | SortOrder
+    verified?: SortOrderInput | SortOrder
+    objection?: SortOrderInput | SortOrder
+    pending?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    _relevance?: OAS_TRENDING_STATSOrderByRelevanceInput
+  }
+
+  export type OAS_TRENDING_STATSWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: OAS_TRENDING_STATSWhereInput | OAS_TRENDING_STATSWhereInput[]
+    OR?: OAS_TRENDING_STATSWhereInput[]
+    NOT?: OAS_TRENDING_STATSWhereInput | OAS_TRENDING_STATSWhereInput[]
+    date?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    program_code?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    program_title?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    program_group?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    intake?: StringNullableFilter<"OAS_TRENDING_STATS"> | string | null
+    submitted?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    not_submitted?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    total?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    oas_fee_received?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    manual_fee_received?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    verified?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    objection?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    pending?: IntNullableFilter<"OAS_TRENDING_STATS"> | number | null
+    created_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"OAS_TRENDING_STATS"> | Date | string | null
+  }, "id">
+
+  export type OAS_TRENDING_STATSOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrderInput | SortOrder
+    program_code?: SortOrderInput | SortOrder
+    program_title?: SortOrderInput | SortOrder
+    program_group?: SortOrderInput | SortOrder
+    intake?: SortOrderInput | SortOrder
+    submitted?: SortOrderInput | SortOrder
+    not_submitted?: SortOrderInput | SortOrder
+    total?: SortOrderInput | SortOrder
+    oas_fee_received?: SortOrderInput | SortOrder
+    manual_fee_received?: SortOrderInput | SortOrder
+    verified?: SortOrderInput | SortOrder
+    objection?: SortOrderInput | SortOrder
+    pending?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    _count?: OAS_TRENDING_STATSCountOrderByAggregateInput
+    _avg?: OAS_TRENDING_STATSAvgOrderByAggregateInput
+    _max?: OAS_TRENDING_STATSMaxOrderByAggregateInput
+    _min?: OAS_TRENDING_STATSMinOrderByAggregateInput
+    _sum?: OAS_TRENDING_STATSSumOrderByAggregateInput
+  }
+
+  export type OAS_TRENDING_STATSScalarWhereWithAggregatesInput = {
+    AND?: OAS_TRENDING_STATSScalarWhereWithAggregatesInput | OAS_TRENDING_STATSScalarWhereWithAggregatesInput[]
+    OR?: OAS_TRENDING_STATSScalarWhereWithAggregatesInput[]
+    NOT?: OAS_TRENDING_STATSScalarWhereWithAggregatesInput | OAS_TRENDING_STATSScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"OAS_TRENDING_STATS"> | number
+    date?: DateTimeNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    program_code?: StringNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | string | null
+    program_title?: StringNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | string | null
+    program_group?: StringNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | string | null
+    intake?: StringNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | string | null
+    submitted?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    not_submitted?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    total?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    oas_fee_received?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    manual_fee_received?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    verified?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    objection?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    pending?: IntNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | number | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"OAS_TRENDING_STATS"> | Date | string | null
+  }
+
+  export type Admissions_STATSWhereInput = {
+    AND?: Admissions_STATSWhereInput | Admissions_STATSWhereInput[]
+    OR?: Admissions_STATSWhereInput[]
+    NOT?: Admissions_STATSWhereInput | Admissions_STATSWhereInput[]
+    id?: IntFilter<"Admissions_STATS"> | number
+    date?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    semester?: StringNullableFilter<"Admissions_STATS"> | string | null
+    mode?: StringNullableFilter<"Admissions_STATS"> | string | null
+    acad_career?: StringNullableFilter<"Admissions_STATS"> | string | null
+    program?: StringNullableFilter<"Admissions_STATS"> | string | null
+    campus?: StringNullableFilter<"Admissions_STATS"> | string | null
+    province?: StringNullableFilter<"Admissions_STATS"> | string | null
+    program_status?: StringNullableFilter<"Admissions_STATS"> | string | null
+    admit_type?: StringNullableFilter<"Admissions_STATS"> | string | null
+    total_students?: IntNullableFilter<"Admissions_STATS"> | number | null
+    male?: IntNullableFilter<"Admissions_STATS"> | number | null
+    female?: IntNullableFilter<"Admissions_STATS"> | number | null
+    transgender?: IntNullableFilter<"Admissions_STATS"> | number | null
+    fresh_admits?: IntNullableFilter<"Admissions_STATS"> | number | null
+    continuing_students?: IntNullableFilter<"Admissions_STATS"> | number | null
+    total_course_enrollments?: IntNullableFilter<"Admissions_STATS"> | number | null
+    created_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+  }
+
+  export type Admissions_STATSOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrderInput | SortOrder
+    semester?: SortOrderInput | SortOrder
+    mode?: SortOrderInput | SortOrder
+    acad_career?: SortOrderInput | SortOrder
+    program?: SortOrderInput | SortOrder
+    campus?: SortOrderInput | SortOrder
+    province?: SortOrderInput | SortOrder
+    program_status?: SortOrderInput | SortOrder
+    admit_type?: SortOrderInput | SortOrder
+    total_students?: SortOrderInput | SortOrder
+    male?: SortOrderInput | SortOrder
+    female?: SortOrderInput | SortOrder
+    transgender?: SortOrderInput | SortOrder
+    fresh_admits?: SortOrderInput | SortOrder
+    continuing_students?: SortOrderInput | SortOrder
+    total_course_enrollments?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    _relevance?: Admissions_STATSOrderByRelevanceInput
+  }
+
+  export type Admissions_STATSWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: Admissions_STATSWhereInput | Admissions_STATSWhereInput[]
+    OR?: Admissions_STATSWhereInput[]
+    NOT?: Admissions_STATSWhereInput | Admissions_STATSWhereInput[]
+    date?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    semester?: StringNullableFilter<"Admissions_STATS"> | string | null
+    mode?: StringNullableFilter<"Admissions_STATS"> | string | null
+    acad_career?: StringNullableFilter<"Admissions_STATS"> | string | null
+    program?: StringNullableFilter<"Admissions_STATS"> | string | null
+    campus?: StringNullableFilter<"Admissions_STATS"> | string | null
+    province?: StringNullableFilter<"Admissions_STATS"> | string | null
+    program_status?: StringNullableFilter<"Admissions_STATS"> | string | null
+    admit_type?: StringNullableFilter<"Admissions_STATS"> | string | null
+    total_students?: IntNullableFilter<"Admissions_STATS"> | number | null
+    male?: IntNullableFilter<"Admissions_STATS"> | number | null
+    female?: IntNullableFilter<"Admissions_STATS"> | number | null
+    transgender?: IntNullableFilter<"Admissions_STATS"> | number | null
+    fresh_admits?: IntNullableFilter<"Admissions_STATS"> | number | null
+    continuing_students?: IntNullableFilter<"Admissions_STATS"> | number | null
+    total_course_enrollments?: IntNullableFilter<"Admissions_STATS"> | number | null
+    created_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"Admissions_STATS"> | Date | string | null
+  }, "id">
+
+  export type Admissions_STATSOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrderInput | SortOrder
+    semester?: SortOrderInput | SortOrder
+    mode?: SortOrderInput | SortOrder
+    acad_career?: SortOrderInput | SortOrder
+    program?: SortOrderInput | SortOrder
+    campus?: SortOrderInput | SortOrder
+    province?: SortOrderInput | SortOrder
+    program_status?: SortOrderInput | SortOrder
+    admit_type?: SortOrderInput | SortOrder
+    total_students?: SortOrderInput | SortOrder
+    male?: SortOrderInput | SortOrder
+    female?: SortOrderInput | SortOrder
+    transgender?: SortOrderInput | SortOrder
+    fresh_admits?: SortOrderInput | SortOrder
+    continuing_students?: SortOrderInput | SortOrder
+    total_course_enrollments?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    _count?: Admissions_STATSCountOrderByAggregateInput
+    _avg?: Admissions_STATSAvgOrderByAggregateInput
+    _max?: Admissions_STATSMaxOrderByAggregateInput
+    _min?: Admissions_STATSMinOrderByAggregateInput
+    _sum?: Admissions_STATSSumOrderByAggregateInput
+  }
+
+  export type Admissions_STATSScalarWhereWithAggregatesInput = {
+    AND?: Admissions_STATSScalarWhereWithAggregatesInput | Admissions_STATSScalarWhereWithAggregatesInput[]
+    OR?: Admissions_STATSScalarWhereWithAggregatesInput[]
+    NOT?: Admissions_STATSScalarWhereWithAggregatesInput | Admissions_STATSScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Admissions_STATS"> | number
+    date?: DateTimeNullableWithAggregatesFilter<"Admissions_STATS"> | Date | string | null
+    semester?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    mode?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    acad_career?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    program?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    campus?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    province?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    program_status?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    admit_type?: StringNullableWithAggregatesFilter<"Admissions_STATS"> | string | null
+    total_students?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    male?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    female?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    transgender?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    fresh_admits?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    continuing_students?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    total_course_enrollments?: IntNullableWithAggregatesFilter<"Admissions_STATS"> | number | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"Admissions_STATS"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Admissions_STATS"> | Date | string | null
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Admissions_STATS"> | Date | string | null
   }
 
   export type account_titleWhereInput = {
@@ -49442,6 +52125,301 @@ export namespace Prisma {
     encumbrance?: NullableIntFieldUpdateOperationsInput | number | null
     expense?: NullableIntFieldUpdateOperationsInput | number | null
     balance?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSCreateInput = {
+    date?: Date | string | null
+    program_code?: string | null
+    program_title?: string | null
+    program_group?: string | null
+    intake?: string | null
+    submitted?: number | null
+    not_submitted?: number | null
+    total?: number | null
+    oas_fee_received?: number | null
+    manual_fee_received?: number | null
+    verified?: number | null
+    objection?: number | null
+    pending?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSUncheckedCreateInput = {
+    id?: number
+    date?: Date | string | null
+    program_code?: string | null
+    program_title?: string | null
+    program_group?: string | null
+    intake?: string | null
+    submitted?: number | null
+    not_submitted?: number | null
+    total?: number | null
+    oas_fee_received?: number | null
+    manual_fee_received?: number | null
+    verified?: number | null
+    objection?: number | null
+    pending?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSUpdateInput = {
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    program_code?: NullableStringFieldUpdateOperationsInput | string | null
+    program_title?: NullableStringFieldUpdateOperationsInput | string | null
+    program_group?: NullableStringFieldUpdateOperationsInput | string | null
+    intake?: NullableStringFieldUpdateOperationsInput | string | null
+    submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    not_submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    oas_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    manual_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    verified?: NullableIntFieldUpdateOperationsInput | number | null
+    objection?: NullableIntFieldUpdateOperationsInput | number | null
+    pending?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    program_code?: NullableStringFieldUpdateOperationsInput | string | null
+    program_title?: NullableStringFieldUpdateOperationsInput | string | null
+    program_group?: NullableStringFieldUpdateOperationsInput | string | null
+    intake?: NullableStringFieldUpdateOperationsInput | string | null
+    submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    not_submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    oas_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    manual_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    verified?: NullableIntFieldUpdateOperationsInput | number | null
+    objection?: NullableIntFieldUpdateOperationsInput | number | null
+    pending?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSCreateManyInput = {
+    id?: number
+    date?: Date | string | null
+    program_code?: string | null
+    program_title?: string | null
+    program_group?: string | null
+    intake?: string | null
+    submitted?: number | null
+    not_submitted?: number | null
+    total?: number | null
+    oas_fee_received?: number | null
+    manual_fee_received?: number | null
+    verified?: number | null
+    objection?: number | null
+    pending?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSUpdateManyMutationInput = {
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    program_code?: NullableStringFieldUpdateOperationsInput | string | null
+    program_title?: NullableStringFieldUpdateOperationsInput | string | null
+    program_group?: NullableStringFieldUpdateOperationsInput | string | null
+    intake?: NullableStringFieldUpdateOperationsInput | string | null
+    submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    not_submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    oas_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    manual_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    verified?: NullableIntFieldUpdateOperationsInput | number | null
+    objection?: NullableIntFieldUpdateOperationsInput | number | null
+    pending?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OAS_TRENDING_STATSUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    program_code?: NullableStringFieldUpdateOperationsInput | string | null
+    program_title?: NullableStringFieldUpdateOperationsInput | string | null
+    program_group?: NullableStringFieldUpdateOperationsInput | string | null
+    intake?: NullableStringFieldUpdateOperationsInput | string | null
+    submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    not_submitted?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    oas_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    manual_fee_received?: NullableIntFieldUpdateOperationsInput | number | null
+    verified?: NullableIntFieldUpdateOperationsInput | number | null
+    objection?: NullableIntFieldUpdateOperationsInput | number | null
+    pending?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type Admissions_STATSCreateInput = {
+    date?: Date | string | null
+    semester?: string | null
+    mode?: string | null
+    acad_career?: string | null
+    program?: string | null
+    campus?: string | null
+    province?: string | null
+    program_status?: string | null
+    admit_type?: string | null
+    total_students?: number | null
+    male?: number | null
+    female?: number | null
+    transgender?: number | null
+    fresh_admits?: number | null
+    continuing_students?: number | null
+    total_course_enrollments?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type Admissions_STATSUncheckedCreateInput = {
+    id?: number
+    date?: Date | string | null
+    semester?: string | null
+    mode?: string | null
+    acad_career?: string | null
+    program?: string | null
+    campus?: string | null
+    province?: string | null
+    program_status?: string | null
+    admit_type?: string | null
+    total_students?: number | null
+    male?: number | null
+    female?: number | null
+    transgender?: number | null
+    fresh_admits?: number | null
+    continuing_students?: number | null
+    total_course_enrollments?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type Admissions_STATSUpdateInput = {
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    semester?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: NullableStringFieldUpdateOperationsInput | string | null
+    acad_career?: NullableStringFieldUpdateOperationsInput | string | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    campus?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    program_status?: NullableStringFieldUpdateOperationsInput | string | null
+    admit_type?: NullableStringFieldUpdateOperationsInput | string | null
+    total_students?: NullableIntFieldUpdateOperationsInput | number | null
+    male?: NullableIntFieldUpdateOperationsInput | number | null
+    female?: NullableIntFieldUpdateOperationsInput | number | null
+    transgender?: NullableIntFieldUpdateOperationsInput | number | null
+    fresh_admits?: NullableIntFieldUpdateOperationsInput | number | null
+    continuing_students?: NullableIntFieldUpdateOperationsInput | number | null
+    total_course_enrollments?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type Admissions_STATSUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    semester?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: NullableStringFieldUpdateOperationsInput | string | null
+    acad_career?: NullableStringFieldUpdateOperationsInput | string | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    campus?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    program_status?: NullableStringFieldUpdateOperationsInput | string | null
+    admit_type?: NullableStringFieldUpdateOperationsInput | string | null
+    total_students?: NullableIntFieldUpdateOperationsInput | number | null
+    male?: NullableIntFieldUpdateOperationsInput | number | null
+    female?: NullableIntFieldUpdateOperationsInput | number | null
+    transgender?: NullableIntFieldUpdateOperationsInput | number | null
+    fresh_admits?: NullableIntFieldUpdateOperationsInput | number | null
+    continuing_students?: NullableIntFieldUpdateOperationsInput | number | null
+    total_course_enrollments?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type Admissions_STATSCreateManyInput = {
+    id?: number
+    date?: Date | string | null
+    semester?: string | null
+    mode?: string | null
+    acad_career?: string | null
+    program?: string | null
+    campus?: string | null
+    province?: string | null
+    program_status?: string | null
+    admit_type?: string | null
+    total_students?: number | null
+    male?: number | null
+    female?: number | null
+    transgender?: number | null
+    fresh_admits?: number | null
+    continuing_students?: number | null
+    total_course_enrollments?: number | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+  }
+
+  export type Admissions_STATSUpdateManyMutationInput = {
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    semester?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: NullableStringFieldUpdateOperationsInput | string | null
+    acad_career?: NullableStringFieldUpdateOperationsInput | string | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    campus?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    program_status?: NullableStringFieldUpdateOperationsInput | string | null
+    admit_type?: NullableStringFieldUpdateOperationsInput | string | null
+    total_students?: NullableIntFieldUpdateOperationsInput | number | null
+    male?: NullableIntFieldUpdateOperationsInput | number | null
+    female?: NullableIntFieldUpdateOperationsInput | number | null
+    transgender?: NullableIntFieldUpdateOperationsInput | number | null
+    fresh_admits?: NullableIntFieldUpdateOperationsInput | number | null
+    continuing_students?: NullableIntFieldUpdateOperationsInput | number | null
+    total_course_enrollments?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type Admissions_STATSUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    semester?: NullableStringFieldUpdateOperationsInput | string | null
+    mode?: NullableStringFieldUpdateOperationsInput | string | null
+    acad_career?: NullableStringFieldUpdateOperationsInput | string | null
+    program?: NullableStringFieldUpdateOperationsInput | string | null
+    campus?: NullableStringFieldUpdateOperationsInput | string | null
+    province?: NullableStringFieldUpdateOperationsInput | string | null
+    program_status?: NullableStringFieldUpdateOperationsInput | string | null
+    admit_type?: NullableStringFieldUpdateOperationsInput | string | null
+    total_students?: NullableIntFieldUpdateOperationsInput | number | null
+    male?: NullableIntFieldUpdateOperationsInput | number | null
+    female?: NullableIntFieldUpdateOperationsInput | number | null
+    transgender?: NullableIntFieldUpdateOperationsInput | number | null
+    fresh_admits?: NullableIntFieldUpdateOperationsInput | number | null
+    continuing_students?: NullableIntFieldUpdateOperationsInput | number | null
+    total_course_enrollments?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53297,6 +56275,193 @@ export namespace Prisma {
     encumbrance?: SortOrder
     expense?: SortOrder
     balance?: SortOrder
+  }
+
+  export type OAS_TRENDING_STATSOrderByRelevanceInput = {
+    fields: OAS_TRENDING_STATSOrderByRelevanceFieldEnum | OAS_TRENDING_STATSOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type OAS_TRENDING_STATSCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    program_code?: SortOrder
+    program_title?: SortOrder
+    program_group?: SortOrder
+    intake?: SortOrder
+    submitted?: SortOrder
+    not_submitted?: SortOrder
+    total?: SortOrder
+    oas_fee_received?: SortOrder
+    manual_fee_received?: SortOrder
+    verified?: SortOrder
+    objection?: SortOrder
+    pending?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type OAS_TRENDING_STATSAvgOrderByAggregateInput = {
+    id?: SortOrder
+    submitted?: SortOrder
+    not_submitted?: SortOrder
+    total?: SortOrder
+    oas_fee_received?: SortOrder
+    manual_fee_received?: SortOrder
+    verified?: SortOrder
+    objection?: SortOrder
+    pending?: SortOrder
+  }
+
+  export type OAS_TRENDING_STATSMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    program_code?: SortOrder
+    program_title?: SortOrder
+    program_group?: SortOrder
+    intake?: SortOrder
+    submitted?: SortOrder
+    not_submitted?: SortOrder
+    total?: SortOrder
+    oas_fee_received?: SortOrder
+    manual_fee_received?: SortOrder
+    verified?: SortOrder
+    objection?: SortOrder
+    pending?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type OAS_TRENDING_STATSMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    program_code?: SortOrder
+    program_title?: SortOrder
+    program_group?: SortOrder
+    intake?: SortOrder
+    submitted?: SortOrder
+    not_submitted?: SortOrder
+    total?: SortOrder
+    oas_fee_received?: SortOrder
+    manual_fee_received?: SortOrder
+    verified?: SortOrder
+    objection?: SortOrder
+    pending?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type OAS_TRENDING_STATSSumOrderByAggregateInput = {
+    id?: SortOrder
+    submitted?: SortOrder
+    not_submitted?: SortOrder
+    total?: SortOrder
+    oas_fee_received?: SortOrder
+    manual_fee_received?: SortOrder
+    verified?: SortOrder
+    objection?: SortOrder
+    pending?: SortOrder
+  }
+
+  export type Admissions_STATSOrderByRelevanceInput = {
+    fields: Admissions_STATSOrderByRelevanceFieldEnum | Admissions_STATSOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type Admissions_STATSCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    semester?: SortOrder
+    mode?: SortOrder
+    acad_career?: SortOrder
+    program?: SortOrder
+    campus?: SortOrder
+    province?: SortOrder
+    program_status?: SortOrder
+    admit_type?: SortOrder
+    total_students?: SortOrder
+    male?: SortOrder
+    female?: SortOrder
+    transgender?: SortOrder
+    fresh_admits?: SortOrder
+    continuing_students?: SortOrder
+    total_course_enrollments?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type Admissions_STATSAvgOrderByAggregateInput = {
+    id?: SortOrder
+    total_students?: SortOrder
+    male?: SortOrder
+    female?: SortOrder
+    transgender?: SortOrder
+    fresh_admits?: SortOrder
+    continuing_students?: SortOrder
+    total_course_enrollments?: SortOrder
+  }
+
+  export type Admissions_STATSMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    semester?: SortOrder
+    mode?: SortOrder
+    acad_career?: SortOrder
+    program?: SortOrder
+    campus?: SortOrder
+    province?: SortOrder
+    program_status?: SortOrder
+    admit_type?: SortOrder
+    total_students?: SortOrder
+    male?: SortOrder
+    female?: SortOrder
+    transgender?: SortOrder
+    fresh_admits?: SortOrder
+    continuing_students?: SortOrder
+    total_course_enrollments?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type Admissions_STATSMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    semester?: SortOrder
+    mode?: SortOrder
+    acad_career?: SortOrder
+    program?: SortOrder
+    campus?: SortOrder
+    province?: SortOrder
+    program_status?: SortOrder
+    admit_type?: SortOrder
+    total_students?: SortOrder
+    male?: SortOrder
+    female?: SortOrder
+    transgender?: SortOrder
+    fresh_admits?: SortOrder
+    continuing_students?: SortOrder
+    total_course_enrollments?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type Admissions_STATSSumOrderByAggregateInput = {
+    id?: SortOrder
+    total_students?: SortOrder
+    male?: SortOrder
+    female?: SortOrder
+    transgender?: SortOrder
+    fresh_admits?: SortOrder
+    continuing_students?: SortOrder
+    total_course_enrollments?: SortOrder
   }
 
   export type account_titleOrderByRelevanceInput = {

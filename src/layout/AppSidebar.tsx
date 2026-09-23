@@ -26,7 +26,8 @@ const navItems: NavItem[] = [
       { name: "E-Office", path: "/eoffice", pro: false },
       { name: "ERP", path: "/erp", pro: false },
       { name: "TMS", path: "/tms", pro: false },
-      // { name: "Admissions (OAS)", path: "/oas", pro: false },
+      { name: "OAS", path: "/oas", pro: false },
+      { name: "Admissions", path: "/admissions", pro: false },
       { name: "CMS", path: "/cms", pro: false },
       { name: "LMS", path: "/lms", pro: false }
     ]

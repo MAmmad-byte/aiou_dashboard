@@ -117,6 +117,61 @@ model ERP_STATS {
 }
 
 
+
+model OAS_TRENDING_STATS {
+  id                  Int       @id @default(autoincrement())
+  date                DateTime? @ftsDb.Date
+  program_code        String?   @ftsDb.VarChar(20)
+  program_title       String?   @ftsDb.VarChar(255)
+  program_group       String?   @ftsDb.VarChar(20)
+  intake              String?   @ftsDb.VarChar(50)
+  submitted           Int?
+  not_submitted       Int?
+  total               Int?
+  oas_fee_received    Int?
+  manual_fee_received Int?
+  verified            Int?
+  objection           Int?
+  pending             Int?
+  created_at          DateTime?
+  updated_at          DateTime?
+  deleted_at          DateTime?
+
+  @@index([program_group])
+  @@index([intake])
+  @@index([program_code])
+}
+
+model Admissions_STATS {
+  id                       Int       @id @default(autoincrement())
+  date                     DateTime? @ftsDb.Date
+  semester                 String?   @ftsDb.VarChar(50)
+  mode                     String?   @ftsDb.VarChar(100)
+  acad_career              String?   @ftsDb.VarChar(100)
+  program                  String?   @ftsDb.VarChar(255)
+  campus                   String?   @ftsDb.VarChar(100)
+  province                 String?   @ftsDb.VarChar(100)
+  program_status           String?   @ftsDb.VarChar(10)
+  admit_type               String?   @ftsDb.VarChar(10)
+  total_students           Int?
+  male                     Int?
+  female                   Int?
+  transgender              Int?
+  fresh_admits             Int?
+  continuing_students      Int?
+  total_course_enrollments Int?
+  created_at               DateTime?
+  updated_at               DateTime?
+  deleted_at               DateTime?
+
+  @@index([semester])
+  @@index([mode])
+  @@index([acad_career])
+  @@index([campus])
+}
+
+
+
 model account_title {
   id         Int       @id @default(autoincrement())
   title      String    @ftsDb.VarChar(52)

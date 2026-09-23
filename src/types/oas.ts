@@ -1,46 +1,56 @@
-// One row = one Semester x Province x Region x Program x Age Band cohort,
-// matching the AIOU_Full_Breakdown CSV template (grand-total rollup rows
-// from the CSV — "ALL PROVINCES" / "ALL REGIONS" / "TOTAL (All Programs)" /
-// "ALL AGES" — are excluded from the dummy data since the dashboard derives
-// the same totals itself by summing the detail rows).
+// One row = one Program x Intake admissions-processing snapshot from OAS —
+// application funnel counts (Submitted -> Fee Received -> Verified /
+// Objection / Pending). program_group holds the real AIOU academic career
+// code (14BH, 16BH, 16MT, 18MT, SSC, HSSC, CERT, PGD, PHD), not a
+// descriptive label.
 
-export interface OasStat {
+export interface TrendingStat {
   id: number;
-  semester: string;
-  country: string;
-  province: string;
-  region: string;
-  program: string;
-  age_band: string;
-  total_applications_received: number;
-  male_enrolled: number;
-  female_enrolled: number;
-  total_enrolled: number;
+  program_code: string;
+  program_title: string;
+  program_group: string;
+  intake: string;
+  submitted: number;
+  not_submitted: number;
+  total: number;
+  oas_fee_received: number;
+  manual_fee_received: number;
+  verified: number;
+  objection: number;
+  pending: number;
 }
 
-export interface OasFilterValues {
-  country: string;
-  semester: string;
-  province: string;
-  region: string;
+export interface TrendingFilterValues {
+  programGroup: string;
   program: string;
-  ageBand: string;
+  intake: string;
 }
 
-export interface OasFilterOptions {
-  countries: string[];
-  semesters: string[];
-  provinces: string[];
-  regions: string[];
+export interface TrendingFilterOptions {
+  programGroups: string[];
+  // Scoped to the selected Program Group — 225 programs total but only a
+  // handful to over a hundred belong to any one group.
   programs: string[];
-  ageBands: string[];
+  intakes: string[];
 }
 
-export interface OasKpis {
+export interface TrendingKpis {
   totalApplications: number;
-  totalEnrolled: number;
-  male: number;
-  female: number;
-  programs: number;
-  enrollmentRate: number;
+  totalSubmitted: number;
+  totalNotSubmitted: number;
+  totalFeeReceived: number; // oas_fee_received + manual_fee_received
+  totalVerified: number;
+  totalObjection: number;
+  totalPending: number;
+  submissionRate: number; // submitted / total * 100
+  verificationRate: number; // verified / submitted * 100
+  programCount: number;
+}
+
+export interface IntakeTrendPoint {
+  intake: string;
+  submitted: number;
+  total: number;
+  verified: number;
+  pending: number;
 }

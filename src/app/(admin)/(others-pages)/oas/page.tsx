@@ -1,80 +1,90 @@
 import type { Metadata } from "next";
-import OasDashboard from "@/components/oas/OasDashboard";
+import TrendingDashboard from "@/components/oas/TrendingDashboard";
+import { TrendingTransitionProvider, TrendingFadeWrapper } from "@/components/oas/TrendingTransitionProvider";
+import TrendingLoadingOverlay from "@/components/oas/TrendingLoadingOverlay";
 import {
-  getAllOasData,
-  filterOasData,
+  buildWhere,
   getFilterOptions,
-  resolveDefaultCountry,
+  resolveDefaultIntake,
+  getFilteredRows,
   computeKpis,
-  byProgram,
-  byProvince,
-  byRegion,
-  byAgeBand,
-  bySemester,
+  byIntake,
+  byProgramGroup,
+  topProgramsBySubmitted,
+  feeChannelBreakdown,
+  statusBreakdown,
+  submissionByProgramGroup,
+  verificationRateByProgramGroup,
 } from "@/lib/oas-data";
 
 export const metadata: Metadata = {
-  title: "OAS Admissions Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "Admissions summary dashboard, filterable via URL query string",
+  title: "Program Trending Dashboard | TailAdmin - Next.js Dashboard Template",
+  description: "OAS admissions application funnel by program, filterable via URL query string",
 };
 
-// Filters live entirely in the URL: /oas?semester=Autumn+2026&province=Punjab
-// Bookmark or share a link and the filtered view comes back exactly as left.
+// Same URL-driven interactivity and loading treatment as the other
+// dashboards (/program-trending?programGroup=16BH&intake=Autumn+2026).
 //
-// Next.js 15: searchParams is async — if you're on Next 14 or earlier, drop
-// the `await` and change the prop type to a plain object instead of a Promise.
-interface OasPageProps {
+// Next.js 15: searchParams is async — on Next 14 or earlier, drop the
+// `await` and change the prop type to a plain object instead of a Promise.
+interface TrendingPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default async function OasPage({ searchParams }: OasPageProps) {
+export default async function ProgramTrendingPage({ searchParams }: TrendingPageProps) {
   const params = await searchParams;
   const getParam = (key: string, fallback: string = "All") =>
     typeof params[key] === "string" ? (params[key] as string) : fallback;
 
-  const allData = getAllOasData();
-  const filterOptions = getFilterOptions(allData);
-  // With no ?country= in the URL at all, default to Pakistan (falling back
-  // to "All" only if Pakistan isn't actually present in the dataset) — every
-  // other filter defaults to "All" as usual.
-  const countryDefault = resolveDefaultCountry(filterOptions);
-
   const current = {
-    country: getParam("country", countryDefault),
-    semester: getParam("semester"),
-    province: getParam("province"),
-    region: getParam("region"),
+    programGroup: getParam("programGroup"),
     program: getParam("program"),
-    ageBand: getParam("ageBand"),
+    intake: "All", // resolved below once we know the default
   };
 
-  const filtered = filterOasData(allData, {
-    country: current.country !== "All" ? current.country : undefined,
-    semester: current.semester !== "All" ? current.semester : undefined,
-    province: current.province !== "All" ? current.province : undefined,
-    region: current.region !== "All" ? current.region : undefined,
+  const filterOptions = await getFilterOptions(current.programGroup !== "All" ? current.programGroup : undefined);
+  // No ?intake= in the URL at all defaults to the latest intake in the
+  // dataset (falls back to "All" only if the table is somehow empty).
+  const intakeDefault = resolveDefaultIntake(filterOptions);
+  current.intake = getParam("intake", intakeDefault);
+
+  const where = buildWhere({
+    programGroup: current.programGroup !== "All" ? current.programGroup : undefined,
     program: current.program !== "All" ? current.program : undefined,
-    ageBand: current.ageBand !== "All" ? current.ageBand : undefined,
+    intake: current.intake !== "All" ? current.intake : undefined,
   });
 
-  const kpis = computeKpis(filtered);
+  const rows = await getFilteredRows(where);
+  const kpis = computeKpis(rows);
+
+  // With a Program Group selected, show a much fuller program-wise
+  // breakdown (up to 40) instead of the generic "top 15 overall" — a
+  // career like 16BH has ~118 programs, and 15 wasn't nearly enough to
+  // represent "the programs that fall under this career."
+  const programChartLimit = current.programGroup !== "All" ? 40 : 15;
 
   return (
-    <div className="grid grid-cols-12 gap-4 md:gap-6">
-      <div className="col-span-12">
-        <OasDashboard
-          filterOptions={filterOptions}
-          current={current}
-          countryDefault={countryDefault}
-          kpis={kpis}
-          semesterTrend={bySemester(filtered)}
-          byProgram={byProgram(filtered)}
-          byProvince={byProvince(filtered)}
-          byRegion={byRegion(filtered)}
-          byAgeBand={byAgeBand(filtered)}
-          records={filtered}
-        />
+    <TrendingTransitionProvider>
+      <div className="relative grid grid-cols-12 gap-4 md:gap-6">
+        <TrendingLoadingOverlay />
+        <div className="col-span-12">
+          <TrendingFadeWrapper>
+            <TrendingDashboard
+              filterOptions={filterOptions}
+              current={current}
+              intakeDefault={intakeDefault}
+              kpis={kpis}
+              trend={byIntake(rows)}
+              feeChannel={feeChannelBreakdown(rows)}
+              statusBreakdown={statusBreakdown(rows)}
+              byProgramGroup={byProgramGroup(rows)}
+              submissionByGroup={submissionByProgramGroup(rows)}
+              topPrograms={topProgramsBySubmitted(rows, programChartLimit)}
+              verificationRateByGroup={verificationRateByProgramGroup(rows)}
+            />
+          </TrendingFadeWrapper>
+        </div>
       </div>
-    </div>
+    </TrendingTransitionProvider>
   );
 }

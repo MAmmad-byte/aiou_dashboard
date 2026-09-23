@@ -40,16 +40,12 @@ const BASE: ApexOptions = {
 };
 
 // ── 1. Applications trend by intake (area) ──────────────────────────────
-// Bar chart, not area/line: an area chart renders an effectively invisible
-// single dot when there's only one x-axis category — guaranteed to happen
-// here whenever a specific Intake is selected (the default filter state).
-// Bars stay clearly visible and readable regardless of category count.
 export function IntakeTrendChart({ data }: { data: IntakeTrendPoint[] }) {
   const options: ApexOptions = {
     ...BASE,
-    chart: { ...BASE.chart, type: "bar" },
-    plotOptions: { bar: { borderRadius: 6, columnWidth: data.length <= 1 ? "35%" : "45%" } },
-    dataLabels: { enabled: data.length <= 1, style: { fontSize: "11px" } },
+    chart: { ...BASE.chart, type: "area" },
+    stroke: { curve: "smooth", width: 2 },
+    fill: { type: "gradient", gradient: { opacityFrom: 0.35, opacityTo: 0.05 } },
     xaxis: { categories: data.map((d) => d.intake), labels: { rotate: -45 } },
     colors: ["#465FFF", "#12B76A", "#F79009"],
     legend: { position: "bottom" },
@@ -63,7 +59,7 @@ export function IntakeTrendChart({ data }: { data: IntakeTrendPoint[] }) {
   return (
     <ChartCard title="Applications Trend by Intake">
       {data.length > 0 ? (
-        <ApexChart key={chartKey} options={options} series={series} type="bar" height={320} />
+        <ApexChart key={chartKey} options={options} series={series} type="area" height={320} />
       ) : (
         <EmptyState />
       )}
@@ -196,15 +192,8 @@ export function SubmissionByGroupChart({ data }: { data: { group: string; submit
   );
 }
 
-// ── 7. Programs by submitted applications (horizontal bar) ───────────────
-// Title/subtitle change based on whether a Program Group (career) is
-// selected: with one selected, this becomes a full program-wise breakdown
-// for that career specifically — not just a generic "top 15 overall" list.
-export function TopProgramsChart({
-  categories,
-  values,
-  groupLabel,
-}: BarSeriesProps & { groupLabel?: string }) {
+// ── 7. Top programs by submitted (horizontal bar) ────────────────────────
+export function TopProgramsChart({ categories, values }: BarSeriesProps) {
   const options: ApexOptions = {
     ...BASE,
     chart: { ...BASE.chart, type: "bar" },
@@ -213,13 +202,8 @@ export function TopProgramsChart({
     colors: ["#7A5AF8"],
   };
   const chartKey = categories.join("|");
-  const scoped = groupLabel && groupLabel !== "All";
-  const title = scoped ? `Programs in ${groupLabel}` : "Top Programs by Submitted Applications";
-  const subtitle = scoped
-    ? `${categories.length} program${categories.length === 1 ? "" : "s"} in this career, ranked by Submitted`
-    : `Top ${categories.length} overall — select a Program Group to see all its programs`;
   return (
-    <ChartCard title={title} subtitle={subtitle}>
+    <ChartCard title="Top Programs by Submitted Applications" subtitle={`Top ${categories.length} — respects Program Group / Program filters`}>
       {values.length > 0 ? (
         <ApexChart
           key={chartKey}

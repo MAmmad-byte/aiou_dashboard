@@ -3,7 +3,7 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterDropdown from "./FilterDropdown";
-import { TrendingFilterOptions, TrendingFilterValues } from "@/types/oas";
+import { TrendingFilterOptions, TrendingFilterValues } from "@/types/trending";
 import { useTrendingTransition } from "./TrendingTransitionProvider";
 
 interface TrendingFiltersProps {

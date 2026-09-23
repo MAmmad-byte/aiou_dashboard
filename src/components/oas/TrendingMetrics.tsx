@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingKpis } from "@/types/oas";
+import { TrendingKpis } from "@/types/trending";
 
 interface MetricCardProps {
   label: string;

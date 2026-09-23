@@ -1,15 +1,14 @@
-
-import { Prisma } from "@/generated/fts-client";
+import { Prisma } from "@prisma/client";
 import { ftsDb } from "@/lib/prisma";
 import {
   TrendingStat,
   TrendingFilterOptions,
   TrendingKpis,
   IntakeTrendPoint,
-} from "@/types/oas";
+} from "@/types/trending";
 
 /**
- * oAS_TRENDING_STATS is ~2,475 rows (225 programs x 11 intakes) —
+ * PROGRAM_TRENDING_STATS is ~2,475 rows (225 programs x 11 intakes) —
  * closer to TMS_STATS/E_OFFICE_STATS scale than CMS_STATS's 85k, so this
  * fetches the filtered rows with one query and aggregates in plain JS
  * rather than pushing every breakdown into SQL groupBy().
@@ -21,16 +20,16 @@ export interface TrendingFilterParams {
   intake?: string;
 }
 
-export function buildWhere(filters: TrendingFilterParams): Prisma.OAS_TRENDING_STATSWhereInput {
-  const where: Prisma.OAS_TRENDING_STATSWhereInput = {};
+export function buildWhere(filters: TrendingFilterParams): Prisma.PROGRAM_TRENDING_STATSWhereInput {
+  const where: Prisma.PROGRAM_TRENDING_STATSWhereInput = {};
   if (filters.programGroup) where.program_group = filters.programGroup;
   if (filters.program) where.program_title = filters.program;
   if (filters.intake) where.intake = filters.intake;
   return where;
 }
 
-export async function getFilteredRows(where: Prisma.OAS_TRENDING_STATSWhereInput): Promise<TrendingStat[]> {
-  const rows = await ftsDb.oAS_TRENDING_STATS.findMany({ where, orderBy: { id: "asc" } });
+export async function getFilteredRows(where: Prisma.PROGRAM_TRENDING_STATSWhereInput): Promise<TrendingStat[]> {
+  const rows = await ftsDb.pROGRAM_TRENDING_STATS.findMany({ where, orderBy: { id: "asc" } });
   return rows
     .filter((r) => r.program_code && r.program_title && r.program_group && r.intake)
     .map((r) => ({
@@ -63,13 +62,13 @@ function seasonSort(a: string, b: string): number {
 // dozens of programs, but far fewer than the full 225).
 export async function getFilterOptions(programGroup?: string): Promise<TrendingFilterOptions> {
   const [groupRows, programRows, intakeRows] = await Promise.all([
-    ftsDb.oAS_TRENDING_STATS.findMany({ distinct: ["program_group"], select: { program_group: true }, where: { program_group: { not: null } } }),
-    ftsDb.oAS_TRENDING_STATS.findMany({
+    ftsDb.pROGRAM_TRENDING_STATS.findMany({ distinct: ["program_group"], select: { program_group: true }, where: { program_group: { not: null } } }),
+    ftsDb.pROGRAM_TRENDING_STATS.findMany({
       distinct: ["program_title"],
       select: { program_title: true },
       where: { program_title: { not: null }, ...(programGroup ? { program_group: programGroup } : {}) },
     }),
-    ftsDb.oAS_TRENDING_STATS.findMany({ distinct: ["intake"], select: { intake: true }, where: { intake: { not: null } } }),
+    ftsDb.pROGRAM_TRENDING_STATS.findMany({ distinct: ["intake"], select: { intake: true }, where: { intake: { not: null } } }),
   ]);
 
   return {

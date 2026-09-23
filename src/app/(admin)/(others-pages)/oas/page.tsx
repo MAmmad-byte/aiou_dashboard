@@ -57,12 +57,6 @@ export default async function ProgramTrendingPage({ searchParams }: TrendingPage
   const rows = await getFilteredRows(where);
   const kpis = computeKpis(rows);
 
-  // With a Program Group selected, show a much fuller program-wise
-  // breakdown (up to 40) instead of the generic "top 15 overall" — a
-  // career like 16BH has ~118 programs, and 15 wasn't nearly enough to
-  // represent "the programs that fall under this career."
-  const programChartLimit = current.programGroup !== "All" ? 40 : 15;
-
   return (
     <TrendingTransitionProvider>
       <div className="relative grid grid-cols-12 gap-4 md:gap-6">
@@ -79,7 +73,7 @@ export default async function ProgramTrendingPage({ searchParams }: TrendingPage
               statusBreakdown={statusBreakdown(rows)}
               byProgramGroup={byProgramGroup(rows)}
               submissionByGroup={submissionByProgramGroup(rows)}
-              topPrograms={topProgramsBySubmitted(rows, programChartLimit)}
+              topPrograms={topProgramsBySubmitted(rows, 15)}
               verificationRateByGroup={verificationRateByProgramGroup(rows)}
             />
           </TrendingFadeWrapper>

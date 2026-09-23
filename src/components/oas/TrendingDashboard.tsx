@@ -1,6 +1,6 @@
 import React from "react";
 import { TrendingFilterOptions, TrendingFilterValues, TrendingKpis } from "@/types/trending";
-import { IntakeTrendPoint } from "@/lib/trending-data";
+import { IntakeTrendPoint } from "@/lib/oas-data";
 import TrendingFilters from "./TrendingFilters";
 import TrendingMetrics from "./TrendingMetrics";
 import {
@@ -88,7 +88,6 @@ export default function TrendingDashboard({
           <TopProgramsChart
             categories={topPrograms.map(([k]) => k)}
             values={topPrograms.map(([, v]) => v)}
-            groupLabel={current.programGroup}
           />
         </div>
         <div className="col-span-12 xl:col-span-6">

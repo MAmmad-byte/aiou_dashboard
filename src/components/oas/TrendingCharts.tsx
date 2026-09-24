@@ -75,7 +75,7 @@ export function FeeChannelDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: ["#465FFF", "#F79009"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);
@@ -100,7 +100,7 @@ export function StatusDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: data.map(([k]) => colorMap[k] ?? "#98A2B3"),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);

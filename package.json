@@ -1,6 +1,6 @@
 {
-  "name": "free-nextjs-admin-dashboard",
-  "version": "2.3.0",
+  "name": "aiou_dashboard",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

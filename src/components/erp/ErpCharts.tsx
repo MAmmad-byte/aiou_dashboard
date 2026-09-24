@@ -126,7 +126,7 @@ export function BudgetTypeDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: data.map(([k]) => colorMap[k] ?? "#98A2B3"),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true ,dropShadow: { enabled: false },},
     stroke: { width: 0 },
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };

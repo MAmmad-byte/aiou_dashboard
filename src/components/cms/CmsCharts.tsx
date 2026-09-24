@@ -80,7 +80,7 @@ export function GenderDonutChart({ male, female, transgender }: { male: number; 
     labels,
     colors: ["#465FFF", "#F79009", "#7A5AF8"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   return (
@@ -102,7 +102,7 @@ export function StatusDonutChart({ active, discontinued }: { active: number; dis
     labels: ["Active", "Discontinued"],
     colors: ["#12B76A", "#F04438"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   const series = [active, discontinued];
@@ -173,7 +173,7 @@ export function ModeDonutChart({ categories, values }: BarSeriesProps) {
     chart: { ...BASE.chart, type: "donut" },
     labels: categories,
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   return (

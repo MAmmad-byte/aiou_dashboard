@@ -108,7 +108,7 @@ export function StudentAllocationDonut({ allocated, unallocated }: { allocated: 
     labels: ["Allocated", "Un-Allocated"],
     colors: ["#12B76A", "#F04438"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   const series = [allocated, unallocated];
@@ -131,7 +131,7 @@ export function FileConfirmationDonut({ confirmed, notConfirmed }: { confirmed: 
     labels: ["Confirmed", "Not Confirmed"],
     colors: ["#465FFF", "#F79009"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   const series = [confirmed, notConfirmed];
@@ -154,7 +154,7 @@ export function EnrollmentAllocationDonut({ allocated, unallocated }: { allocate
     labels: ["Allocated", "Un-Allocated"],
     colors: ["#0EA5A5", "#F04438"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   const series = [allocated, unallocated];

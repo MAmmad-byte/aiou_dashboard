@@ -80,7 +80,12 @@ export function GenderDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: ["#465FFF", "#F79009", "#7A5AF8"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    // dataLabels: { enabled: true },
+    dataLabels: {
+  enabled: true,
+  style: { colors: data.map(() => "#FFFFFF")},
+  dropShadow: { enabled: false },
+},
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);
@@ -104,7 +109,7 @@ export function FreshVsContinuingDonutChart({ data }: { data: [string, number][]
     labels: data.map(([k]) => k),
     colors: ["#12B76A", "#465FFF"],
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);
@@ -127,7 +132,7 @@ export function ModeDonutChart({ data }: { data: [string, number][] }) {
     chart: { ...BASE.chart, type: "donut" },
     labels: data.map(([k]) => k),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true,dropShadow: { enabled: false }, },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);

@@ -55,7 +55,7 @@ export function FilesByDepartmentDonutChart({ categories, values }: BarSeriesPro
     chart: { ...BASE.chart, type: "donut" },
     labels: top.map(([k]) => k),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = top.map(([, v]) => v);
@@ -79,7 +79,7 @@ export function StatusDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: data.map(([k]) => colorMap[k] ?? "#98A2B3"),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);
@@ -103,7 +103,7 @@ export function PriorityDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: data.map(([k]) => colorMap[k] ?? "#98A2B3"),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true },
+    dataLabels: { enabled: true, dropShadow: { enabled: false } },
     stroke: { width: 0 },
   };
   const series = data.map(([, v]) => v);

@@ -18,7 +18,7 @@ import {
 } from "@/lib/oas-data";
 
 export const metadata: Metadata = {
-  title: "Program Trending Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "Program Trending Dashboard | AIOU Dashboard",
   description: "OAS admissions application funnel by program, filterable via URL query string",
 };
 

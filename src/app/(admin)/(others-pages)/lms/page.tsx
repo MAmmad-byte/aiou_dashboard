@@ -15,7 +15,7 @@ import {
 } from "@/lib/lms-data";
 
 export const metadata: Metadata = {
-  title: "LMS Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "LMS Dashboard | AIOU Dashboard",
   description: "Learning management summary dashboard, filterable via URL query string",
 };
 

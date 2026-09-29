@@ -21,7 +21,7 @@ import {
 } from "@/lib/admissions-data";
 
 export const metadata: Metadata = {
-  title: "Admissions Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "Admissions Dashboard | AIOU Dashboard",
   description: "University-wide admissions summary, filterable via URL query string",
 };
 

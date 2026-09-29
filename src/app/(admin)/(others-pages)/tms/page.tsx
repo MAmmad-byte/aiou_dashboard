@@ -16,7 +16,7 @@ import {
 } from "@/lib/tms-data";
 
 export const metadata: Metadata = {
-  title: "TMS Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "TMS Dashboard | AIOU Dashboard",
   description: "Tutor allocation summary dashboard, filterable via URL query string",
 };
 

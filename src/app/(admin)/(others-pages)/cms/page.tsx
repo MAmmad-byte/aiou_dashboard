@@ -18,7 +18,7 @@ import {
 } from "@/lib/cms-data";
 
 export const metadata: Metadata = {
-  title: "CMS Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "CMS Dashboard | AIOU Dashboard",
   description: "Admissions & enrollment summary dashboard, filterable via URL query string",
 };
 

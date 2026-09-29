@@ -19,7 +19,7 @@ import {
 } from "@/lib/eoffice-data";
 
 export const metadata: Metadata = {
-  title: "E-Office Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "E-Office Dashboard | AIOU Dashboard",
   description: "E-Office file allocation dashboard, filterable via URL query string",
 };
 

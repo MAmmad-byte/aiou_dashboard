@@ -16,7 +16,7 @@ import {
 } from "@/lib/erp-data";
 
 export const metadata: Metadata = {
-  title: "ERP Budget Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "ERP Budget Dashboard | AIOU Dashboard",
   description: "Departmental budget dashboard, filterable via URL query string",
 };
 

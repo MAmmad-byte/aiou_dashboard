@@ -17,7 +17,7 @@ import {
 interface TrendingDashboardProps {
   filterOptions: TrendingFilterOptions;
   current: TrendingFilterValues;
-  intakeDefault: string;
+  intakeDefault: string[];
   kpis: TrendingKpis;
   trend: IntakeTrendPoint[];
   feeChannel: [string, number][];
@@ -88,6 +88,7 @@ export default function TrendingDashboard({
           <TopProgramsChart
             categories={topPrograms.map(([k]) => k)}
             values={topPrograms.map(([, v]) => v)}
+            groupLabel={current.programGroup}
           />
         </div>
         <div className="col-span-12 xl:col-span-6">

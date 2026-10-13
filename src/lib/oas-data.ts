@@ -1,4 +1,3 @@
-
 import { Prisma } from "@/generated/fts-client";
 import { ftsDb } from "@/lib/prisma";
 import {
@@ -6,10 +5,10 @@ import {
   TrendingFilterOptions,
   TrendingKpis,
   IntakeTrendPoint,
-} from "@/types/oas";
+} from "@/types/trending";
 
 /**
- * oAS_TRENDING_STATS is ~2,475 rows (225 programs x 11 intakes) —
+ * OAS_TRENDING_STATS is ~2,475 rows (225 programs x 11 intakes) —
  * closer to TMS_STATS/E_OFFICE_STATS scale than CMS_STATS's 85k, so this
  * fetches the filtered rows with one query and aggregates in plain JS
  * rather than pushing every breakdown into SQL groupBy().
@@ -18,14 +17,19 @@ import {
 export interface TrendingFilterParams {
   programGroup?: string;
   program?: string;
-  intake?: string;
+  /** One or more intakes to filter to. Omit (or pass an empty array) for
+   * no intake filter. A single-element array still works fine with
+   * Prisma's `in`, so callers don't need to special-case the count. */
+  intake?: string[];
 }
 
 export function buildWhere(filters: TrendingFilterParams): Prisma.OAS_TRENDING_STATSWhereInput {
   const where: Prisma.OAS_TRENDING_STATSWhereInput = {};
   if (filters.programGroup) where.program_group = filters.programGroup;
   if (filters.program) where.program_title = filters.program;
-  if (filters.intake) where.intake = filters.intake;
+  if (filters.intake && filters.intake.length > 0) {
+    where.intake = filters.intake.length === 1 ? filters.intake[0] : { in: filters.intake };
+  }
   return where;
 }
 
@@ -80,9 +84,11 @@ export async function getFilterOptions(programGroup?: string): Promise<TrendingF
 }
 
 /** Defaults the Intake filter to the most recent intake (chronologically —
- * "Spring 2026" must outrank "Autumn 2025" even though "A" < "S"). */
-export function resolveDefaultIntake(options: TrendingFilterOptions): string {
-  return options.intakes.length > 0 ? options.intakes[options.intakes.length - 1] : "All";
+ * "Spring 2026" must outrank "Autumn 2025" even though "A" < "S"), as a
+ * single-element array. The person can widen this to more than one via the
+ * multi-select dropdown. */
+export function resolveDefaultIntake(options: TrendingFilterOptions): string[] {
+  return options.intakes.length > 0 ? [options.intakes[options.intakes.length - 1]] : ["All"];
 }
 
 function sumBy(rows: TrendingStat[], key: keyof TrendingStat): number {
@@ -140,18 +146,20 @@ export function topProgramsBySubmitted(rows: TrendingStat[], n = 15): [string, n
 }
 
 export function feeChannelBreakdown(rows: TrendingStat[]): [string, number][] {
-  return [
+  const entries: [string, number][] = [
     ["OAS (Online)", sumBy(rows, "oas_fee_received")],
     ["Manual", sumBy(rows, "manual_fee_received")],
-  ].filter(([, v]) => v > 0) as [string, number][];
+  ];
+  return entries.filter(([, v]) => v > 0);
 }
 
 export function statusBreakdown(rows: TrendingStat[]): [string, number][] {
-  return [
+  const entries: [string, number][] = [
     ["Verified", sumBy(rows, "verified")],
     ["Objection", sumBy(rows, "objection")],
     ["Pending", sumBy(rows, "pending")],
-  ].filter(([, v]) => v > 0) as [string, number][];
+  ];
+  return entries.filter(([, v]) => v > 0);
 }
 
 /** Submitted vs Not Submitted per program group — a genuine two-series

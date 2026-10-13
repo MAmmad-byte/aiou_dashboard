@@ -3,10 +3,6 @@ import { Prisma } from "@/generated/fts-client";
 import { ftsDb } from "@/lib/prisma";
 import { CmsStatRow, CmsFilterOptions, CmsKpis, IntakePeriodPoint } from "@/types/cms";
 
-// Re-exported so callers can `import { IntakePeriodPoint } from "@/lib/cms-data"`
-// alongside CareerGenderSplit/PaginatedResult below, which actually are
-// defined here — keeps all the aggregate result types importable from one
-// place instead of some from @/types/cms and some from @/lib/cms-data.
 export type { IntakePeriodPoint };
 
 export interface CmsFilterParams {

@@ -23,7 +23,9 @@ export interface TrendingStat {
 export interface TrendingFilterValues {
   programGroup: string;
   program: string;
-  intake: string;
+  /** One or more selected intakes. ["All"] (or an empty array) means no
+   * intake filter is applied. */
+  intake: string[];
 }
 
 export interface TrendingFilterOptions {

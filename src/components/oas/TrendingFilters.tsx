@@ -3,6 +3,7 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterDropdown from "./FilterDropdown";
+import MultiSelectDropdown from "./MultiSelectDropdown";
 import { TrendingFilterOptions, TrendingFilterValues } from "@/types/trending";
 import { useTrendingTransition } from "./TrendingTransitionProvider";
 
@@ -10,8 +11,9 @@ interface TrendingFiltersProps {
   options: TrendingFilterOptions;
   current: TrendingFilterValues;
   /** What Intake resolves to with no ?intake= param at all (the latest
-   * intake in the dataset) — used only to know whether Reset should show. */
-  intakeDefault: string;
+   * intake in the dataset, as a single-element array) — used only to know
+   * whether Reset should show. */
+  intakeDefault: string[];
 }
 
 export default function TrendingFilters({ options, current, intakeDefault }: TrendingFiltersProps) {
@@ -48,11 +50,16 @@ export default function TrendingFilters({ options, current, intakeDefault }: Tre
   // Intake behaves like Year did on the CMS page: absence of the param
   // means "default to the latest intake", not "All intakes" — so picking
   // "All Intakes" has to write an explicit ?intake=All rather than
-  // deleting the param.
-  function setIntake(value: string) {
+  // deleting the param. Now multi-select: several intakes are written as
+  // repeated ?intake=X&intake=Y params.
+  function setIntakes(values: string[]) {
     const params = new URLSearchParams(searchParams.toString());
-    if (value === "All") params.set("intake", "All");
-    else params.set("intake", value);
+    params.delete("intake");
+    if (values.length === 0) {
+      params.set("intake", "All");
+    } else {
+      values.forEach((v) => params.append("intake", v));
+    }
     push(params);
   }
 
@@ -62,8 +69,11 @@ export default function TrendingFilters({ options, current, intakeDefault }: Tre
     });
   }
 
+  const intakeMatchesDefault =
+    current.intake.length === intakeDefault.length && current.intake.every((i) => intakeDefault.includes(i));
+
   const hasActiveFilter =
-    current.programGroup !== "All" || current.program !== "All" || current.intake !== intakeDefault;
+    current.programGroup !== "All" || current.program !== "All" || !intakeMatchesDefault;
 
   return (
     <div className={`flex flex-wrap gap-3 ${isPending ? "opacity-60" : ""}`}>
@@ -80,7 +90,7 @@ export default function TrendingFilters({ options, current, intakeDefault }: Tre
         onChange={setProgram}
         searchable
       />
-      <FilterDropdown label="Intakes" options={options.intakes} selected={current.intake} onChange={setIntake} />
+      <MultiSelectDropdown label="Intakes" options={options.intakes} selected={current.intake} onChange={setIntakes} />
       {hasActiveFilter && (
         <button
           onClick={resetAll}

@@ -21,7 +21,7 @@ import {
 } from "@/lib/admissions-data";
 
 export const metadata: Metadata = {
-  title: "Admissions Dashboard | AIOU Dashboard",
+  title: "Admissions Dashboard | TailAdmin - Next.js Dashboard Template",
   description: "University-wide admissions summary, filterable via URL query string",
 };
 
@@ -38,23 +38,34 @@ export default async function AdmissionsPage({ searchParams }: AdmissionsPagePro
   const params = await searchParams;
   const getParam = (key: string, fallback: string = "All") =>
     typeof params[key] === "string" ? (params[key] as string) : fallback;
+  // Semester is now multi-select: the URL carries it either as a single
+  // ?semester=X or as repeated ?semester=X&semester=Y for multiple values.
+  // Normalize both shapes into an array; no param at all falls through to
+  // the semester default below.
+  const getParamArray = (key: string): string[] | undefined => {
+    const raw = params[key];
+    if (raw === undefined) return undefined;
+    return Array.isArray(raw) ? raw : [raw];
+  };
 
   const filterOptions = await getFilterOptions();
   // No ?semester= in the URL at all defaults to the latest semester
-  // (falls back to "All" only if the table is somehow empty) — this
+  // (falls back to ["All"] only if the table is somehow empty) — this
   // mirrors the Year/Country/Intake default pattern on the other
   // dashboards. Explicitly setting ?semester=All still shows everything.
   const semesterDefault = resolveDefaultSemester(filterOptions);
 
   const current = {
-    semester: getParam("semester", semesterDefault),
+    semester: getParamArray("semester") ?? semesterDefault,
     mode: getParam("mode"),
     acadCareer: getParam("acadCareer"),
     campus: getParam("campus"),
   };
 
+  const selectedSemesters = current.semester.includes("All") ? undefined : current.semester;
+
   const where = buildWhere({
-    semester: current.semester !== "All" ? current.semester : undefined,
+    semester: selectedSemesters,
     mode: current.mode !== "All" ? current.mode : undefined,
     acadCareer: current.acadCareer !== "All" ? current.acadCareer : undefined,
     campus: current.campus !== "All" ? current.campus : undefined,

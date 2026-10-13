@@ -57,6 +57,12 @@ export default function ErpFilters({ options, current }: ErpFiltersProps) {
 
   return (
     <div className={`flex flex-wrap gap-3 ${isPending ? "opacity-60" : ""}`}>
+      <FilterDropdown
+        label="Fiscal Years"
+        options={options.fiscalYears}
+        selected={current.fiscalYear}
+        onChange={(v) => setSimple("fiscalYear", v)}
+      />
       <FilterDropdown label="Campuses" options={options.campuses} selected={current.campus} onChange={setCampus} />
       <FilterDropdown
         label="Departments"
@@ -70,12 +76,6 @@ export default function ErpFilters({ options, current }: ErpFiltersProps) {
         options={options.budgetTypes}
         selected={current.budgetType}
         onChange={(v) => setSimple("budgetType", v)}
-      />
-      <FilterDropdown
-        label="Fiscal Years"
-        options={options.fiscalYears}
-        selected={current.fiscalYear}
-        onChange={(v) => setSimple("fiscalYear", v)}
       />
       {hasActiveFilter && (
         <button

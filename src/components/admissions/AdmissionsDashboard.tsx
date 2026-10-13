@@ -19,7 +19,7 @@ import {
 interface AdmissionsDashboardProps {
   filterOptions: AdmissionsFilterOptions;
   current: AdmissionsFilterValues;
-  semesterDefault: string;
+  semesterDefault: string[];
   kpis: AdmissionsKpis;
   trend: SemesterTrendPoint[];
   gender: [string, number][];

@@ -3,6 +3,7 @@
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterDropdown from "./FilterDropdown";
+import MultiSelectDropdown from "./MultiSelectDropdown";
 import { AdmissionsFilterOptions, AdmissionsFilterValues } from "@/types/admissions";
 import { useAdmissionsTransition } from "./AdmissionsTransitionProvider";
 
@@ -10,8 +11,9 @@ interface AdmissionsFiltersProps {
   options: AdmissionsFilterOptions;
   current: AdmissionsFilterValues;
   /** What Semester resolves to with no ?semester= param at all (the latest
-   * semester in the dataset) — used only to know whether Reset should show. */
-  semesterDefault: string;
+   * semester in the dataset, as a single-element array) — used only to know
+   * whether Reset should show. */
+  semesterDefault: string[];
 }
 
 export default function AdmissionsFilters({ options, current, semesterDefault }: AdmissionsFiltersProps) {
@@ -30,10 +32,16 @@ export default function AdmissionsFilters({ options, current, semesterDefault }:
   // Semester behaves like Year did on the CMS page: absence of the param
   // means "default to the latest semester", not "All semesters" — so
   // picking "All Semesters" has to write an explicit ?semester=All rather
-  // than deleting the param.
-  function setSemester(value: string) {
+  // than deleting the param. Now multi-select: several semesters are
+  // written as repeated ?semester=X&semester=Y params.
+  function setSemesters(values: string[]) {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("semester", value);
+    params.delete("semester");
+    if (values.length === 0) {
+      params.set("semester", "All");
+    } else {
+      values.forEach((v) => params.append("semester", v));
+    }
     push(params);
   }
 
@@ -50,15 +58,19 @@ export default function AdmissionsFilters({ options, current, semesterDefault }:
     });
   }
 
+  const semesterMatchesDefault =
+    current.semester.length === semesterDefault.length &&
+    current.semester.every((s) => semesterDefault.includes(s));
+
   const hasActiveFilter =
-    current.semester !== semesterDefault ||
+    !semesterMatchesDefault ||
     current.mode !== "All" ||
     current.acadCareer !== "All" ||
     current.campus !== "All";
 
   return (
     <div className={`flex flex-wrap gap-3 ${isPending ? "opacity-60" : ""}`}>
-      <FilterDropdown label="Semesters" options={options.semesters} selected={current.semester} onChange={setSemester} />
+      <MultiSelectDropdown label="Semesters" options={options.semesters} selected={current.semester} onChange={setSemesters} />
       <FilterDropdown
         label="Modes"
         options={options.modes}

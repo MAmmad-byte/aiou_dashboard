@@ -15,7 +15,10 @@ import {
 export type { SemesterTrendPoint, CareerFreshContinuingPoint, RegionFreshContinuingPoint };
 
 export interface AdmissionsFilterParams {
-  semester?: string;
+  /** One or more semesters to filter to. Omit (or pass an empty array) for
+   * no semester filter. A single-element array still works fine with
+   * Prisma's `in`, so callers don't need to special-case the count. */
+  semester?: string[];
   mode?: string;
   acadCareer?: string;
   campus?: string;
@@ -23,7 +26,9 @@ export interface AdmissionsFilterParams {
 
 export function buildWhere(filters: AdmissionsFilterParams): Prisma.Admissions_STATSWhereInput {
   const where: Prisma.Admissions_STATSWhereInput = {};
-  if (filters.semester) where.semester = filters.semester;
+  if (filters.semester && filters.semester.length > 0) {
+    where.semester = filters.semester.length === 1 ? filters.semester[0] : { in: filters.semester };
+  }
   if (filters.mode) where.mode = filters.mode;
   if (filters.acadCareer) where.acad_career = filters.acadCareer;
   if (filters.campus) where.campus = filters.campus;
@@ -80,12 +85,12 @@ export async function getFilterOptions(): Promise<AdmissionsFilterOptions> {
   };
 }
 
-/** Defaults the Semester filter to the most recent semester (chronologically).
- * Falls back to "All" if the table is somehow empty. With only one semester
- * currently loaded, this just resolves to that one — the filter and default
- * logic don't need special-casing as more semesters get added later. */
-export function resolveDefaultSemester(options: AdmissionsFilterOptions): string {
-  return options.semesters.length > 0 ? options.semesters[options.semesters.length - 1] : "All";
+/** Defaults the Semester filter to the most recent semester (chronologically),
+ * as a single-element array. Falls back to ["All"] if the table is somehow
+ * empty. Now that there are multiple semesters loaded, the person can widen
+ * this to more than one via the multi-select dropdown. */
+export function resolveDefaultSemester(options: AdmissionsFilterOptions): string[] {
+  return options.semesters.length > 0 ? [options.semesters[options.semesters.length - 1]] : ["All"];
 }
 
 function sumBy(rows: AdmissionsStat[], key: keyof AdmissionsStat): number {

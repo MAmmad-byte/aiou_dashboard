@@ -48,7 +48,7 @@ import React from "react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AIOU Dashboard | TailAdmin - Next.js Dashboard Template",
+  title: "AIOU Dashboard",
   description: "AIOU Dashboard — select a system to view its analytics",
 };
 

@@ -43,7 +43,11 @@ const BASE: ApexOptions = {
   grid: { strokeDashArray: 4 },
 };
 
-function money(v: number): string {
+// Accepts string | number: ApexCharts passes a string to xaxis label
+// formatters but a number to yaxis ones, so one helper serves both.
+function money(value: string | number): string {
+  const v = Number(value);
+  if (Number.isNaN(v)) return String(value);
   const abs = Math.abs(v);
   if (abs >= 1_000_000_000) return `${(v / 1_000_000_000).toFixed(1)}B`;
   if (abs >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
@@ -65,7 +69,7 @@ export function FiscalYearTrendChart({ data }: { data: FiscalYearTrendPoint[] })
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };
   const series = [
-    { name: "Budget", data: data.map((d) => d.commitment) },
+    { name: "Commitment", data: data.map((d) => d.commitment) },
     { name: "Expense", data: data.map((d) => d.expense) },
     { name: "Balance", data: data.map((d) => d.balance) },
   ];
@@ -96,12 +100,12 @@ export function CampusComparisonChart({ data }: { data: CampusComparisonPoint[] 
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };
   const series = [
-    { name: "Budget", data: data.map((d) => d.commitment) },
+    { name: "Commitment", data: data.map((d) => d.commitment) },
     { name: "Expense", data: data.map((d) => d.expense) },
   ];
   const chartKey = data.map((d) => d.campus).join("|");
   return (
-    <ChartCard title="Expense vs Budget by Campus" subtitle={`Top ${data.length} campuses by Budget`}>
+    <ChartCard title="Expense vs Commitment by Campus" subtitle={`Top ${data.length} campuses by commitment`}>
       {data.length > 0 ? (
         <ReactApexChart
           key={chartKey}
@@ -126,13 +130,13 @@ export function BudgetTypeDonutChart({ data }: { data: [string, number][] }) {
     labels: data.map(([k]) => k),
     colors: data.map(([k]) => colorMap[k] ?? "#98A2B3"),
     legend: { position: "bottom" },
-    dataLabels: { enabled: true ,dropShadow: { enabled: false },},
+    dataLabels: { enabled: true },
     stroke: { width: 0 },
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };
   const series = data.map(([, v]) => v);
   return (
-    <ChartCard title="Budget by Type">
+    <ChartCard title="Commitment by Budget Type">
       {series.length > 0 ? (
         <ReactApexChart options={options} series={series} type="donut" height={280} />
       ) : (
@@ -160,7 +164,7 @@ export function UtilizationRadialChart({ rate }: { rate: number }) {
     stroke: { lineCap: "round" },
   };
   return (
-    <ChartCard title="Utilization Rate" subtitle="Expense ÷ Budget">
+    <ChartCard title="Utilization Rate" subtitle="Expense ÷ Commitment">
       <ReactApexChart options={options} series={[Number(rate.toFixed(1))]} type="radialBar" height={280} />
     </ChartCard>
   );
@@ -182,11 +186,11 @@ export function TopDepartmentsChart({ categories, values }: BarSeriesProps) {
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };
   return (
-    <ChartCard title="Top Departments by Budget" subtitle="Respects the Campus filter">
+    <ChartCard title="Top Departments by Commitment" subtitle="Respects the Campus filter">
       {values.length > 0 ? (
         <ReactApexChart
           options={options}
-          series={[{ name: "Budget", data: values }]}
+          series={[{ name: "Commitment", data: values }]}
           type="bar"
           height={Math.max(320, categories.length * 28)}
         />
@@ -226,7 +230,7 @@ export function TopAccountsChart({ categories, values }: BarSeriesProps) {
   );
 }
 
-// ── 7. Budget / Expense / Balance by department (grouped bar) ───────
+// ── 7. Commitment / Expense / Balance by department (grouped bar) ───────
 export function DepartmentFinancialsChart({ data }: { data: DepartmentFinancials[] }) {
   const options: ApexOptions = {
     ...BASE,
@@ -238,12 +242,12 @@ export function DepartmentFinancialsChart({ data }: { data: DepartmentFinancials
     tooltip: { y: { formatter: (v) => `PKR ${v.toLocaleString()}` } },
   };
   const series = [
-    { name: "Budget", data: data.map((d) => d.commitment) },
+    { name: "Commitment", data: data.map((d) => d.commitment) },
     { name: "Expense", data: data.map((d) => d.expense) },
     { name: "Balance", data: data.map((d) => d.balance) },
   ];
   return (
-    <ChartCard title="Budget / Expense / Balance by Department" subtitle={`Top ${data.length} departments by Budget`}>
+    <ChartCard title="Commitment / Expense / Balance by Department" subtitle={`Top ${data.length} departments by commitment`}>
       {data.length > 0 ? (
         <ReactApexChart options={options} series={series} type="bar" height={Math.max(360, data.length * 34)} />
       ) : (
@@ -263,7 +267,7 @@ export function UtilizationRateByCampusChart({ categories, values }: BarSeriesPr
     colors: ["#F79009"],
   };
   return (
-    <ChartCard title="Utilization Rate by Campus" subtitle="Expense ÷ Budget, ranked highest first">
+    <ChartCard title="Utilization Rate by Campus" subtitle="Expense ÷ Commitment, ranked highest first">
       {values.length > 0 ? (
         <ReactApexChart
           options={options}

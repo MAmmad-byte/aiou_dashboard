@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 import type { ApexOptions } from "apexcharts";
 import React from "react";
-import { DepartmentTimeSplit } from "@/lib/eoffice-data";
-
+// import { DepartmentTimeSplit } from "@/lib/eoffice-data";
+import { DepartmentTimeSplit } from "@/types/eoffice";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });

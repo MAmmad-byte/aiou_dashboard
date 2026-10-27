@@ -28,7 +28,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* Set your custom subpath here */
-  basePath: "/insights",
+  // basePath: "/insights",
 
   webpack(config) {
     config.module.rules.push({

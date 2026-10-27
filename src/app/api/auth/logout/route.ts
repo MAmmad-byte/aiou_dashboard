@@ -6,5 +6,5 @@ export async function GET() {
   cookieStore.delete("dash_session");
 
   const laravelUrl = process.env.LARAVEL_URL ?? "https://eoffice.aiou.edu.pk";
-  return NextResponse.redirect(`${laravelUrl}/logout`);
+  return NextResponse.redirect(`${laravelUrl}`);
 }

@@ -210,24 +210,29 @@ exports.Prisma.ERP_STATSScalarFieldEnum = {
   deleted_at: 'deleted_at'
 };
 
-exports.Prisma.OAS_TRENDING_STATSScalarFieldEnum = {
+exports.Prisma.OAS_STATSScalarFieldEnum = {
   id: 'id',
-  date: 'date',
-  program_code: 'program_code',
-  program_title: 'program_title',
-  program_group: 'program_group',
-  intake: 'intake',
-  submitted: 'submitted',
-  not_submitted: 'not_submitted',
-  total: 'total',
-  oas_fee_received: 'oas_fee_received',
-  manual_fee_received: 'manual_fee_received',
+  semester: 'semester',
+  program: 'program',
+  country: 'country',
+  province: 'province',
+  district: 'district',
+  tehsil: 'tehsil',
   verified: 'verified',
+  not_submitted: 'not_submitted',
   objection: 'objection',
-  pending: 'pending',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  submitted: 'submitted',
+  male_count: 'male_count',
+  female_count: 'female_count',
+  transgender_count: 'transgender_count',
+  count_under_18: 'count_under_18',
+  count_18_30: 'count_18_30',
+  count_30_40: 'count_30_40',
+  count_40_50: 'count_40_50',
+  count_above_50: 'count_above_50',
+  fee_verified_count: 'fee_verified_count',
+  total_applicants: 'total_applicants',
+  created_at: 'created_at'
 };
 
 exports.Prisma.Admissions_STATSScalarFieldEnum = {
@@ -765,11 +770,13 @@ exports.Prisma.ERP_STATSOrderByRelevanceFieldEnum = {
   campus: 'campus'
 };
 
-exports.Prisma.OAS_TRENDING_STATSOrderByRelevanceFieldEnum = {
-  program_code: 'program_code',
-  program_title: 'program_title',
-  program_group: 'program_group',
-  intake: 'intake'
+exports.Prisma.OAS_STATSOrderByRelevanceFieldEnum = {
+  semester: 'semester',
+  program: 'program',
+  country: 'country',
+  province: 'province',
+  district: 'district',
+  tehsil: 'tehsil'
 };
 
 exports.Prisma.Admissions_STATSOrderByRelevanceFieldEnum = {
@@ -982,7 +989,7 @@ exports.Prisma.ModelName = {
   CMS_STATS: 'CMS_STATS',
   TMS_STATS: 'TMS_STATS',
   ERP_STATS: 'ERP_STATS',
-  OAS_TRENDING_STATS: 'OAS_TRENDING_STATS',
+  OAS_STATS: 'OAS_STATS',
   Admissions_STATS: 'Admissions_STATS',
   account_title: 'account_title',
   alerts: 'alerts',

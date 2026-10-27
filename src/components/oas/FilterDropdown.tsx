@@ -58,13 +58,7 @@ export default function FilterDropdown({
           viewBox="0 0 20 20"
           fill="none"
         >
-          <path
-            d="M4.5 7.5L10 13L15.5 7.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <path d="M4.5 7.5L10 13L15.5 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
@@ -98,9 +92,7 @@ export default function FilterDropdown({
             >
               All {label}
             </button>
-            {visibleOptions.length === 0 && (
-              <div className="px-4 py-3 text-sm text-gray-400">No matches</div>
-            )}
+            {visibleOptions.length === 0 && <div className="px-4 py-3 text-sm text-gray-400">No matches</div>}
             {visibleOptions.map((option) => (
               <button
                 key={option}

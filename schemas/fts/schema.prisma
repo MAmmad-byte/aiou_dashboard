@@ -118,28 +118,34 @@ model ERP_STATS {
 
 
 
-model OAS_TRENDING_STATS {
-  id                  Int       @id @default(autoincrement())
-  date                DateTime? @ftsDb.Date
-  program_code        String?   @ftsDb.VarChar(20)
-  program_title       String?   @ftsDb.VarChar(255)
-  program_group       String?   @ftsDb.VarChar(20)
-  intake              String?   @ftsDb.VarChar(50)
-  submitted           Int?
-  not_submitted       Int?
-  total               Int?
-  oas_fee_received    Int?
-  manual_fee_received Int?
-  verified            Int?
-  objection           Int?
-  pending             Int?
-  created_at          DateTime?
-  updated_at          DateTime?
-  deleted_at          DateTime?
+model OAS_STATS {
+  id                Int      @id @default(autoincrement())
+  semester          String?  @ftsDb.VarChar(20)
+  program           String?  @ftsDb.VarChar(150)
+  country           String?  @ftsDb.VarChar(60)
+  province           String?  @ftsDb.VarChar(60)
+  district          String?  @ftsDb.VarChar(60)
+  tehsil            String?  @ftsDb.VarChar(60)
+  verified          Int      @default(0)
+  not_submitted     Int      @default(0)
+  objection         Int      @default(0)
+  submitted         Int      @default(0)
+  male_count        Int      @default(0)
+  female_count      Int      @default(0)
+  transgender_count Int      @default(0)
+  count_under_18    Int      @default(0)
+  count_18_30       Int      @default(0)
+  count_30_40       Int      @default(0)
+  count_40_50       Int      @default(0)
+  count_above_50    Int      @default(0)
+  fee_verified_count Int     @default(0)
+  total_applicants  Int?     @default(dbgenerated("(`verified` + `not_submitted` + `objection` + `submitted`)"))
+  created_at        DateTime? @default(now())
 
-  @@index([program_group])
-  @@index([intake])
-  @@index([program_code])
+  @@index([semester])
+  @@index([province])
+  @@index([program])
+  @@index([total_applicants])
 }
 
 model Admissions_STATS {

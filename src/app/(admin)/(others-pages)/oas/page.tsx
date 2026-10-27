@@ -1,101 +1,95 @@
 import type { Metadata } from "next";
-import TrendingDashboard from "@/components/oas/TrendingDashboard";
-import { TrendingTransitionProvider, TrendingFadeWrapper } from "@/components/oas/TrendingTransitionProvider";
-import TrendingLoadingOverlay from "@/components/oas/TrendingLoadingOverlay";
+import OasApplicantDashboard from "@/components/oas/OasApplicantDashboard";
+import { OasApplicantTransitionProvider, OasApplicantFadeWrapper } from "@/components/oas/OasApplicantTransitionProvider";
+import OasApplicantLoadingOverlay from "@/components/oas/OasApplicantLoadingOverlay";
 import {
   buildWhere,
   getFilterOptions,
-  resolveDefaultIntake,
-  getFilteredRows,
+  resolveDefaultSemester,
   computeKpis,
-  byIntake,
-  byProgramGroup,
-  topProgramsBySubmitted,
-  feeChannelBreakdown,
+  bySemester,
   statusBreakdown,
-  submissionByProgramGroup,
-  verificationRateByProgramGroup,
-} from "@/lib/oas-data";
+  genderBreakdown,
+  ageBandBreakdown,
+  byRegionTop,
+  byProgramTop,
+  byCountryTop,
+} from "@/lib/oas-applicant-data";
 
 export const metadata: Metadata = {
-  title: "Program Trending Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "OAS admissions application funnel by program, filterable via URL query string",
+  title: "OAS Applicants | AIOU Dashboard",
+  description: "OAS applicant funnel by semester, region, and program — filterable via URL query string",
 };
 
-// Same URL-driven interactivity and loading treatment as the other
-// dashboards (/program-trending?programGroup=16BH&intake=Autumn+2026).
+// /oas-applicants?semester=Autumn-2026&region=Punjab&program=B.ED%20(1.5%20YEAR)
 //
 // Next.js 15: searchParams is async — on Next 14 or earlier, drop the
 // `await` and change the prop type to a plain object instead of a Promise.
-interface TrendingPageProps {
+interface OasApplicantsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default async function ProgramTrendingPage({ searchParams }: TrendingPageProps) {
+export default async function OasApplicantsPage({ searchParams }: OasApplicantsPageProps) {
   const params = await searchParams;
   const getParam = (key: string, fallback: string = "All") =>
     typeof params[key] === "string" ? (params[key] as string) : fallback;
-  // Intake is now multi-select: the URL carries it either as a single
-  // ?intake=X or as repeated ?intake=X&intake=Y for multiple values.
-  // Normalize both shapes into an array; no param at all falls through to
-  // the intake default below.
-  const getParamArray = (key: string): string[] | undefined => {
-    const raw = params[key];
-    if (raw === undefined) return undefined;
-    return Array.isArray(raw) ? raw : [raw];
-  };
+
+  const filterOptions = await getFilterOptions();
+  // No ?semester= in the URL at all defaults to the latest semester
+  // (falls back to "All" only if the table is somehow empty) — same
+  // convention as every other dashboard here. Explicitly setting
+  // ?semester=All still shows everything.
+  const semesterDefault = resolveDefaultSemester(filterOptions);
 
   const current = {
-    programGroup: getParam("programGroup"),
+    semester: getParam("semester", semesterDefault),
+    region: getParam("region"),
     program: getParam("program"),
-    intake: [] as string[], // resolved below once we know the default
   };
 
-  const filterOptions = await getFilterOptions(current.programGroup !== "All" ? current.programGroup : undefined);
-  // No ?intake= in the URL at all defaults to the latest intake in the
-  // dataset (falls back to ["All"] only if the table is somehow empty).
-  const intakeDefault = resolveDefaultIntake(filterOptions);
-  current.intake = getParamArray("intake") ?? intakeDefault;
-
-  const selectedIntakes = current.intake.includes("All") ? undefined : current.intake;
-
   const where = buildWhere({
-    programGroup: current.programGroup !== "All" ? current.programGroup : undefined,
+    semester: current.semester !== "All" ? current.semester : undefined,
+    region: current.region !== "All" ? current.region : undefined,
     program: current.program !== "All" ? current.program : undefined,
-    intake: selectedIntakes,
   });
 
-  const rows = await getFilteredRows(where);
-  const kpis = computeKpis(rows);
+  const kpis = await computeKpis(where);
 
-  // With a Program Group selected, show a much fuller program-wise
-  // breakdown (up to 40) instead of the generic "top 15 overall" — a
-  // career like 16BH has ~118 programs, and 15 wasn't nearly enough to
-  // represent "the programs that fall under this career."
-  const programChartLimit = current.programGroup !== "All" ? 40 : 15;
+  const [trend, status, gender, ageBands, byRegion, byProgram, byCountry] = await Promise.all([
+    bySemester(where),
+    statusBreakdown(kpis),
+    genderBreakdown(where),
+    ageBandBreakdown(where),
+    byRegionTop(where, 15),
+    // A selected Region narrows programs enough that a higher limit is
+    // still readable — same "widen the breakdown once a filter narrows
+    // the rest" pattern used for Program Trending's program-group scoping.
+    byProgramTop(where, current.region !== "All" ? 25 : 15),
+    byCountryTop(where, 10),
+  ]);
 
   return (
-    <TrendingTransitionProvider>
+    <OasApplicantTransitionProvider>
       <div className="relative grid grid-cols-12 gap-4 md:gap-6">
-        <TrendingLoadingOverlay />
+        <OasApplicantLoadingOverlay />
         <div className="col-span-12">
-          <TrendingFadeWrapper>
-            <TrendingDashboard
+          <OasApplicantFadeWrapper>
+            <OasApplicantDashboard
               filterOptions={filterOptions}
               current={current}
-              intakeDefault={intakeDefault}
+              semesterDefault={semesterDefault}
               kpis={kpis}
-              trend={byIntake(rows)}
-              feeChannel={feeChannelBreakdown(rows)}
-              statusBreakdown={statusBreakdown(rows)}
-              byProgramGroup={byProgramGroup(rows)}
-              submissionByGroup={submissionByProgramGroup(rows)}
-              topPrograms={topProgramsBySubmitted(rows, programChartLimit)}
-              verificationRateByGroup={verificationRateByProgramGroup(rows)}
+              trend={trend}
+              statusBreakdown={status}
+              gender={gender}
+              ageBands={ageBands}
+              byRegion={byRegion}
+              byProgram={byProgram}
+              byCountry={byCountry}
             />
-          </TrendingFadeWrapper>
+          </OasApplicantFadeWrapper>
         </div>
       </div>
-    </TrendingTransitionProvider>
+    </OasApplicantTransitionProvider>
   );
 }

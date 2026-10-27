@@ -23,7 +23,7 @@ export interface AdmissionsStat {
 }
 
 export interface AdmissionsFilterValues {
-  semester: string;
+  semester: string[];
   mode: string;
   acadCareer: string;
   campus: string;

@@ -57,7 +57,7 @@ export default function OasApplicantFilters({ options, current, semesterDefault 
     <div className={`flex flex-wrap gap-3 ${isPending ? "opacity-60" : ""}`}>
       <FilterDropdown label="Semesters" options={options.semesters} selected={current.semester} onChange={setSemester} />
       <FilterDropdown
-        label="Regions"
+        label="Province"
         options={options.regions}
         selected={current.region}
         onChange={(v) => setSimple("region", v)}

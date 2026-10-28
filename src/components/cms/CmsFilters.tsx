@@ -63,7 +63,7 @@ export default function CmsFilters({ options, current, yearDefault }: CmsFilters
         onChange={(v) => setParam("year", v, false)}
       />
       <FilterDropdown
-        label="Seasons"
+        label="Semesters"
         options={options.seasons}
         selected={current.season}
         onChange={(v) => setParam("season", v)}
